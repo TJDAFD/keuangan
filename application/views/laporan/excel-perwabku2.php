@@ -1,5 +1,5 @@
 <?php
-header_excel('belum-perwabku-pertanggal'.date("d-m-y").'.xls');
+header_excel('belum-perwabku-pertanggal'.date("d-m-Y").'.xls');
 ?>
 <table width="100%">
     <tr><td colspan="8">REKAP BKK BELUM PERWABKU PER TANGGAL <?= date("d-m-y") ?></td></tr>
@@ -23,7 +23,7 @@ header_excel('belum-perwabku-pertanggal'.date("d-m-y").'.xls');
         <td><?= $data->satker ?></td>
         <td><?= $data->kode_bkk ?></td>
         <td align="center"><?= datetimefmysql($data->waktu) ?></td>
-        <td><?= $data->uraian ?></td>
+        <td><?= $data->uraian ?>, <i><?= $data->keterangan ?></i></td>
         <td align="right"><?= rupiah($data->dana) ?></td>
         <td><?= $data->penerima ?></td>
     </tr>

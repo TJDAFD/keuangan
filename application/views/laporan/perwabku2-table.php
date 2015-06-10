@@ -20,7 +20,7 @@
         <td><?= $data->satker ?></td>
         <td><?= $data->kode_bkk ?></td>
         <td align="center"><?= datetimefmysql($data->waktu) ?></td>
-        <td><?= $data->uraian ?></td>
+        <td><?= $data->uraian ?>, <i><?= $data->keterangan ?></i></td>
         <td align="right"><?= rupiah($data->dana) ?></td>
         <td><?= $data->penerima ?></td>
         <td></td>
