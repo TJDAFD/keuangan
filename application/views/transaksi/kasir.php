@@ -469,9 +469,7 @@
                         message_edit_success();
                         //cetak_bukti_kas(data.id, 'bkk');
                     }
-                    $('#form_kasir').dialog('destroy');
                 }
-                reset_form();
             }
         });
     }
