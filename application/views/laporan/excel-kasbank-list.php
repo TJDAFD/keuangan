@@ -29,7 +29,7 @@
         <td>SALDO AWAL</td>
         <td></td>
         <td></td>
-        <td align="right"><?= ($value->saldo) ?></td>
+        <td align="right"><?= formatcurrency($value->saldo) ?></td>
     </tr>
 
     <?php 
@@ -76,9 +76,9 @@
             <td align="center"><?= $data->kode ?></td>
             <td align="center"><?= datefmysql($data->tanggal) ?></td>
             <td><?= ($data->keterangan !== '')?'<i>'.$data->keterangan.'</i>':$data->uraian ?></td>
-            <td align="right"><?= $debet ?></td>
-            <td align="right"><?= $kredit ?></td>
-            <td align="right"><?= ($sisa) ?></td>
+            <td align="right"><?= formatcurrency($debet) ?></td>
+            <td align="right"><?= formatcurrency($kredit) ?></td>
+            <td align="right"><?= formatcurrency($sisa) ?></td>
         </tr>
     <?php
     } ?>

@@ -24,7 +24,7 @@ header_excel('belum-perwabku-pertanggal'.date("d-m-Y").'.xls');
         <td><?= $data->kode_bkk ?></td>
         <td align="center"><?= datetimefmysql($data->waktu) ?></td>
         <td><?= $data->uraian ?>, <i><?= $data->keterangan ?></i></td>
-        <td align="right"><?= rupiah($data->dana) ?></td>
+        <td align="right"><?= formatcurrency($data->dana) ?></td>
         <td><?= $data->penerima ?></td>
     </tr>
     <?php } ?>
