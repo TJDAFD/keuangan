@@ -72,16 +72,6 @@
         });
     }
 
-    function get_nomor_perwabku() {
-        $.ajax({
-            url: '<?= base_url('autocomplete/get_nomor_perwabku') ?>',
-            dataType: 'json',
-            success: function(data) {
-               $('#nomor').val(data);
-            }
-        });
-    }
-
     function removeEl(el) {
         el.parentNode.remove();
         var jml = $('.rows_bkk').length;
@@ -261,7 +251,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="modal_title">Tambah Transaksi Kasir</h4>
+          <h4 class="modal-title" id="modal_title">Tambah Transaksi Perwabku</h4>
         </div>
         <div class="modal-body">
         <form action="" id="save_perwabku" role="form" class="form-horizontal">

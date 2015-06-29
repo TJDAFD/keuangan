@@ -14,6 +14,9 @@
             <file>file:/var/www/html/keuangan/application/views/transaksi/renbut.php</file>
             <file>file:/var/www/html/keuangan/application/views/layout.php</file>
             <file>file:/var/www/html/keuangan/application/views/transaksi/kasir.php</file>
+            <file>file:/var/www/html/keuangan/application/views/laporan/excel-perwabku.php</file>
+            <file>file:/var/www/html/keuangan/application/views/laporan/excel-kasbank-list.php</file>
+            <file>file:/var/www/html/keuangan/application/helpers/functions_helper.php</file>
         </group>
     </open-files>
 </project-private>
