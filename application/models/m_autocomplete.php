@@ -377,7 +377,7 @@ class M_autocomplete extends CI_Model {
     }
     
     function get_nomor_perwabku($tanggal) {
-        $sql = "select substr(kode,10,4) as kode from perwabku where tanggal like '".$tanggal."%' order by id desc limit 1";
+        $sql = "select substr(kode,8,4) as kode from perwabku where tanggal like '".$tanggal."%' order by id desc limit 1";
         $row = $this->db->query($sql)->row();
         if (!isset($row->kode)) {
             $nomor = 0;
@@ -386,6 +386,6 @@ class M_autocomplete extends CI_Model {
         }
         $thn = substr($tanggal, 2, 2);
         $bln = substr($tanggal, 5, 2);
-        return 'PWK'.$thn.$bln.pad($nomor+1,4);
+        return 'PWK'.$thn.$bln.str_pad((string)($nomor+1), 4, "0", STR_PAD_LEFT);
     }
 }
