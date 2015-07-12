@@ -76,8 +76,8 @@
             <td align="center"><?= $data->kode ?></td>
             <td align="center"><?= datefmysql($data->tanggal) ?></td>
             <td><?= ($data->keterangan !== '')?'<i>'.$data->keterangan.'</i>':$data->uraian ?></td>
-            <td align="right"><?= formatcurrency($debet) ?></td>
-            <td align="right"><?= formatcurrency($kredit) ?></td>
+            <td align="right"><?= ($debet !== '')?formatcurrency($debet):'' ?></td>
+            <td align="right"><?= ($kredit !== '')?formatcurrency($kredit):'' ?></td>
             <td align="right"><?= formatcurrency($sisa) ?></td>
         </tr>
     <?php
