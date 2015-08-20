@@ -213,19 +213,54 @@ class M_laporan extends CI_Model {
             //echo $sql_child;
             $result[$key]->detail = $this->db->query($sql_child)->result();
             
-            $sql_saldo = "select 
+            /*$sql_saldo = "select 
             (select sum(pengeluaran) from kasir where jenis != 'BKK' and tanggal < '".$param['awal']."' and (id_rekening like ('%".$value->id."%') or id_rekening_pwk like ('%".$value->id."%')))
                 -
             (select sum(pengeluaran) from kasir where jenis = 'BKK' and tanggal < '".$param['awal']."' and (id_rekening like ('%".$value->id."%') or id_rekening_pwk like ('%".$value->id."%'))) as awal
+                ";*/
+            
+            $date = explode('-', $param['awal']);
+            $date2= mktime(0, 0, 0, $date[1], $date[2], $date[0]);
+            $akhir= date("Y-m-d", $date2);
+            
+            $sql_saldo_awal = "select k.*, u.uraian, s.nama as rekening
+            from kasir k
+            left join uraian u on (k.id_uraian = u.id)
+            left join sub_sub_sub_sub_rekening s on (k.id_rekening = s.id)
+            where k.id is not NULL and (k.id_rekening = '".$value->id."' or k.id_rekening_pwk = '".$value->id."')
+                and k.tanggal < '".$akhir."'
                 ";
+            $array_data = $this->db->query($sql_saldo_awal)->result();
+            $result[$key]->child = $array_data;
+            $sisa  = 0;
+            foreach ($array_data as $i => $data) {
+                if ($data->jenis === 'BKK' and $data->id_rekening_pwk === $value->id) {
+                    $sisa += $data->pengeluaran;
+                } 
+                else if ($data->jenis === 'BKK' and $data->id_rekening === $value->id) {
+                    $sisa -= $data->pengeluaran;
+                }
+                else if ($data->jenis === 'MTS' and $data->id_rekening_pwk === $value->id) {
+                    $sisa -= $data->pengeluaran;
+                }
+                else if ($data->jenis === 'MTS' and $data->id_rekening === $value->id) {
+                    $sisa += $data->pengeluaran;
+                }
+                else if ($data->jenis === 'BKM' and $data->id_rekening_pwk === $value->id) {
+                    $sisa -= $data->pengeluaran;
+                }
+                else if ($data->jenis === 'BKM' and $data->id_rekening === $value->id) {
+                    $sisa += $data->pengeluaran;
+                }
+            }
         
-            $result[$key]->saldo = $this->db->query($sql_saldo)->row()->awal;
-            $result[$key]->what = $this->db->query($sql_saldo)->row()->awal;
+            $result[$key]->saldo = $sisa;
+            $result[$key]->what = $sisa;
         }
-        $data['list_data'] = $result;
+        $return['list_data'] = $result;
         
         //die(json_encode($data));
-        return $data;
+        return $return;
     }
     
     function get_saldo_awal_kas($bulan) {
