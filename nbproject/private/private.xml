@@ -8,6 +8,14 @@
             <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/kasbank-list.php</file>
             <file>file:/home/arvinnizar/html/keuangan/application/controllers/laporan.php</file>
             <file>file:/home/arvinnizar/html/keuangan/application/models/m_laporan.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/masterdata/user_group.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/perwabku.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/controllers/masterdata.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/masterdata/list_group.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/masterdata/privilege.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/masterdata/list_privileges.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/models/m_masterdata.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/masterdata/group.php</file>
         </group>
     </open-files>
 </project-private>

@@ -5,16 +5,17 @@
     <script type="text/javascript">
         var data = '';
         $(function() {
-            $('#tabs').tabs();
-            my_ajax('<?= base_url() ?>masterdata/user_group','#group');
-            $('.group').click(function(){
-                if($('#group').html()=== ''){
+            $('#mytab a:first').tab('show');
+            //$('#tabs').tabs();
+            my_ajax('<?= base_url() ?>masterdata/user_group','#tab1');
+            $('#tabs-1').click(function(){
+                if($('#tab1').html()=== ''){
                     my_ajax('<?= base_url('masterdata/user_group') ?>','#group');
                 }
                 
             });
-            $('.user').click(function(){
-                if($('#user').html()=== ''){
+            $('#tabs-2').click(function(){
+                if($('#tab2').html()=== ''){
                     my_ajax('<?= base_url('masterdata/user_account') ?>','#user');
                 }
             });
@@ -46,7 +47,7 @@
         }
     </script>
 
-    <div id="tabs">
+<!--    <div id="tabs">
         <ul>
             <li><a class="group" href="#group">User Group</a></li>
             <li><a class="user" href="#user">User Account</a></li>
@@ -54,6 +55,16 @@
 
         <div id="group"></div>
         <div id="user"></div>
+    </div>-->
+    
+    <ul id="mytab" class="nav nav-tabs">
+        <li class="link_tab" id="tabs-1"><a href="#tab1" data-toggle="tab"> Level User</a></li>
+        <li class="link_tab" id="tabs-2"><a href="#tab2" data-toggle="tab"> User Account</a></li>
+    </ul>
+    <br/>
+    <div class="tab-content">
+        <div class="tab-pane" id="tab1"></div>
+        <div class="tab-pane" id="tab2"></div>
     </div>
 
 

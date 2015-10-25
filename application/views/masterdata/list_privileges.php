@@ -19,6 +19,7 @@
             <td><?= $rows->form_nama ?></td>
             <td><?= $rows->url ?></td>
             <td class="aksi" align="center">
+                View 
                 <?php
                 $check = in_array($rows->id, $user_priv);
                 echo form_checkbox('data[]', $rows->id, $check, '', (empty($check))?FALSE:TRUE);
@@ -33,6 +34,3 @@
     endforeach; ?>
     </tbody>
 </table>
-
-</div>
-<?= form_close() ?>

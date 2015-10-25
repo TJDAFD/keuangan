@@ -623,7 +623,7 @@
             <div class="form-group">
                 <label class="col-lg-3 control-label">Tanggal:</label>
                 <div class="col-lg-8">
-                    <input type="text" name="tanggal" id="tanggal" value="<?= date("d/m/Y") ?>" class="form-control" />
+                    <input type="text" name="tanggal" id="tanggal_jurnal" value="<?= date("d/m/Y") ?>" class="form-control" />
                 </div>
             </div>
             <div class="form-group">
@@ -703,34 +703,7 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-<!--    <div id="form_kasir" class="nodisplay">
-        <?= form_open('', 'id=formkasir') ?>
-        <input type="hidden" name="id_kasir" id="id_kasir" />
-        <table class="inputan" width="100%">
-            <tr><td>Nama Transaksi:</td><td><?= form_dropdown('jenis', array('' => 'Pilih ...', 'bkk' => 'Kas Keluar', 'bkm' => 'Kas Masuk','mts' => 'Mutasi'), NULL, 'id=jenis style="width: 300px;"') ?></td></tr>
-            <tr><td>Tanggal Kegiatan:</td><td><?= form_input('tanggal', date("d/m/Y"), 'size=15 id=tanggal') ?></td></tr>
-            <tr><td>No.</td><td><?= form_input('no', NULL, 'id=no') ?></td></tr>
-            <tr><td>Sumber Dana:</td><td><?= form_dropdown('sumberdana', array('' => 'Pilih ...', 'Kas' => 'Kas', 'Bank' => 'Bank'), NULL, 'id="sumberdana" style="width: 300px;"') ?></td></tr>
-            <tr><td id="kdatas">Kode Perkiraan (D)*:</td><td><?= form_input('', NULL, 'id=kode_perkiraan size=60') ?><?= form_hidden('kode_perkiraan', NULL, 'id=hide_kode_perkiraan') ?></td></tr>
-            <tr><td>Nomor Renbut:</td><td><?= form_input('kode_renbut', NULL, 'id=kode_renbut size=60') ?><small style="font-style: italic;">Mengacu ke bulan kegiatan</small><?= form_hidden('id_renbut', NULL, 'id=id_renbut') ?></td></tr>
-            <tr><td>Tahun Anggaran</td><td>
-                <select name="tahun" id="tahun">
-                <?php for ($i = date("Y"); $i >=2014 ; $i--) { ?>
-                    <option value="<?= $i ?>" <?= (($i === date("Y"))?'selected':'') ?>><?= $i ?></option>
-                <?php } ?>
-                </select></td></tr>
-            <tr><td>Kode MA/Proja:</td><td><?= form_input('kode', NULL, 'id=kode') ?><?= form_hidden('id_kode', NULL, 'id=id_kode') ?></td></tr>
-            <tr><td>Pengguna Anggaran:</td><td><?= form_input('pengguna', NULL, 'id=pengguna') ?></td></tr>
-            <tr><td valign="top">Uraian:</td><td id="label_uraian"></td></tr>
-            <tr><td valign="top">Keterangan <i>Memorial</i>:</td><td><?= form_textarea('uraian', NULL, 'id=uraian_kasir rows=4 style="width: 294px;"') ?></td></tr>
-            <tr><td>Nominal Rp.:</td><td><?= form_input('jumlah', NULL, 'id=jumlah onkeyup="FormNum(this);"') ?></td></tr>
-            <tr><td id="pngjwb">-</td><td><?= form_input('nama_user', NULL, 'id=nama_user') ?></td></tr>
-            <tr><td>Jenis Transaksi:</td><td><?= form_dropdown('perwabku', array('' => 'Pilih ...', 'Default' => 'Default', 'Belum' => 'Belum (DP)', 'Sudah' => 'Sudah (Pusat Biaya)'), NULL, 'id=perwabku') ?></td></tr>
-            <tr><td style="white-space: nowrap;" id="kdbawah">Kode Perkiraan Lawan (K)*:</td><td><?= form_input('', NULL, 'id=kode_perkiraan_pwk size=60') ?><?= form_hidden('kode_perkiraan_pwk', NULL, 'id=hide_kode_perkiraan_pwk') ?></td></tr>
-            <tr><td></td><td><?= form_button('Simpan', 'id=simpan') ?> <?= form_button('Reset', 'id=reset') ?></td></tr>
-        </table>
-        <?= form_close() ?>
-    </div>-->
+
     <div id="datamodal_kasir" class="modal fade">
     <div class="modal-dialog" style="width: 820px;">
       <div class="modal-content">
