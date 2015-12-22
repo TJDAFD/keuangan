@@ -10,6 +10,13 @@
         }).on('changeDate', function(){
             $(this).datepicker('hide');
         });
+        
+        $('#tanggal').blur(function() {
+            if ($(this).val() === '') {
+                var value = $('#tanggal_kegiatan').val();
+                $(this).val(value);
+            }
+        });
 
         $('#awal_verifikasi, #akhir_verifikasi, #awal_jurnal, #akhir_jurnal').datepicker({
             format: 'dd/mm/yyyy'
@@ -350,7 +357,7 @@
                 //$('#result-kasir').html(data);
                 $('#id_kasir').val(data.id);
                 $('#jenis').val(data.kode_trans.toLowerCase());
-                $('#tanggal').val(datefmysql(data.tanggal));
+                $('#tanggal, #tanggal_kegiatan').val(datefmysql(data.tanggal));
                 $('#no').val(data.kode);
                 $('#sumberdana').val(data.sumberdana);
                 $('#kode_perkiraan').val(data.id_rekening+' '+data.rekening);
@@ -722,8 +729,9 @@
             </div>
             <div class="form-group">
                 <label class="col-lg-3 control-label">Tanggal Kegiatan:</label>
-                <div class="col-lg-8">
-                    <?= form_input('tanggal', date("d/m/Y"), 'size=15 id=tanggal class="form-control"') ?>
+                <div class="col-lg-3">
+                    <span><input type="text" name="tanggal" id="tanggal" class="form-control" /></span>
+                    <span><input type="hidden" id="tanggal_kegiatan" /></span>
                 </div>
             </div>
             <div class="form-group">
