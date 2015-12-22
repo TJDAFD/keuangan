@@ -713,6 +713,7 @@ class M_transaksi extends CI_Model {
             left join sub_sub_sub_sub_rekening s4r on (pg.id_rekening = s4r.id)
             left join sub_sub_sub_sub_rekening s4r2 on (pg.id_rekening_pwk = s4r2.id)
             where pg.id = '$id'";
+        //echo $sql;
         return $this->db->query($sql);
     }
     

@@ -9,6 +9,12 @@
         $('#reset').click(function() {
             $('#loaddata').load('<?= base_url('transaksi/kasir') ?>');
         });
+        $('#tanggal').blur(function() {
+            if ($(this).val() === '') {
+                var value = $('#tanggal_kegiatan').val();
+                $(this).val(value);
+            }
+        });
         $('#jenis').change(function() {
             var nilai = $(this).val();
             if (nilai === 'bkk') {
@@ -36,7 +42,9 @@
             $('#datamodal').modal('show');
         });
         $('#tambah_button').click(function() {
+            reset_form();
             $('#datamodal_tambah').modal('show');
+            $('#datamodal_tambah #modal_title').html('Tambah Transaksi Kasir');
         });
         $('#reload_kasir_data').click(function() {
             reset_form();
@@ -319,7 +327,9 @@
 
     function edit_kasir(id, transaksi) {
         $('#perwabku, #kode_renbut').removeAttr('disabled');
+        $('#datamodal_tambah #modal_title').html('Edit Transaksi Kasir');
         $('#datamodal_tambah').modal('show');
+        $('#tanggal').val('');
         $.ajax({
             url: '<?= base_url('transaksi/get_data_kasir') ?>/'+id+'/'+transaksi,
             cache: false,
@@ -328,7 +338,7 @@
                 //$('#result-kasir').html(data);
                 $('#id_kasir').val(data.id);
                 $('#jenis').val(data.kode_trans.toLowerCase());
-                $('#tanggal').val(datefmysql(data.tanggal));
+                $('#tanggal, #tanggal_kegiatan').val(datefmysql(data.tanggal));
                 $('#no').val(data.kode);
                 $('#sumberdana').val(data.sumberdana);
                 $('#kode_perkiraan').val(data.id_rekening+' '+data.rekening);
@@ -410,9 +420,9 @@
         if ($('#jenis').val() === '') {
             dc_validation('#jenis','Nama transaksi harus dipilih'); return false;
         }
-        /*if ($('#id_renbut').val() === '') {
-            custom_message('Peringatan', 'Nomor renbut harus dipilih', '#kode_renbut'); return false;
-        }*/
+        if ($('#tanggal').val() === '') {
+            dc_validation('#tanggal', 'Tanggal tidak boleh kosong'); return false;
+        }
         if ($('#jumlah').val() === '') {
             dc_validation('#jumlah','Jumlah tidak boleh kosong'); return false;
         }
@@ -511,7 +521,7 @@
             </div>
         </div>
     </div>
-    <div id="datamodal_tambah" class="modal fade">
+    <div id="datamodal_tambah" class="modal fade" style="overflow-y: auto">
     <div class="modal-dialog" style="width: 820px;">
       <div class="modal-content">
         <div class="modal-header">
@@ -529,8 +539,9 @@
             </div>
             <div class="form-group">
                 <label class="col-lg-3 control-label">Tanggal Kegiatan:</label>
-                <div class="col-lg-8">
-                    <?= form_input('tanggal', date("d/m/Y"), 'size=15 id=tanggal class="form-control"') ?>
+                <div class="col-lg-3">
+                    <span><input type="text" name="tanggal" id="tanggal" class="form-control" /></span>
+                    <span><input type="hidden" id="tanggal_kegiatan" /></span>
                 </div>
             </div>
             <div class="form-group">
