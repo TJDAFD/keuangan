@@ -49,8 +49,8 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
+$db['default']['username'] = 'keuw';
+$db['default']['password'] = 'keuwubhara20140k3';
 $db['default']['database'] = 'db_keuangan';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
