@@ -1,6 +1,5 @@
 <title><?= $title ?></title>
 <?= $this->load->view('message') ?>
-<div class="titling"><h1><?= $title ?></h1></div>
 <script type="text/javascript">
     $(function() {
         get_list_jurnal(1);
@@ -599,6 +598,12 @@
 
 
 </script>
+    <div class="titling"><h1><?= $title ?></h1></div>
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Masterdata</a></li>
+        <li class="active">Data Penerbang</li>
+    </ol>
     <div class="kegiatan">
         <div id="tabs">
             <ul>

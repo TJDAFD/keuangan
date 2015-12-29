@@ -1,141 +1,155 @@
 <title><?= $title ?></title>
-<div class="titling"><h1><?= $title ?></h1></div>
 <?= $this->load->view('message') ?>
 <script type="text/javascript">
-$(function() {
-    $('#tabs').tabs();
-    get_list_unit(1);
-    $('#add_unit').button({
-        icons: {
-            secondary: 'ui-icon-newwin'
-        }
-    }).click(function() {
-        form_unit();
-    });
-    
-    $('#reload_unit').button({
-        icons: {
-            secondary: 'ui-icon-refresh'
-        }
-    }).click(function() {
-        get_list_unit();
-    });
-});
-function get_list_unit(page, src, id) {
-    $.ajax({
-        url: '<?= base_url('masterdata/manage_unit') ?>/list/'+page,
-        data: 'search='+src+'&id='+id,
-        cache: false,
-        success: function(data) {
-            $('#result').html(data);
-        }
-    });
-}
+    $(function() {
+        $('#tabs').tabs();
+        get_list_unit(1);
+        $('#add_unit').click(function() {
+            reset_form();
+            $('#datamodal').modal('show');
+            $('#datamodal h4').html('Tambah Data Unit Satuan Kerja');
+        });
 
-function form_unit() {
-    var str = '<div id="dialog_unit"><form action="" id="save_unit">'+
-            '<?= form_hidden('id_unit', NULL, 'id=id_unit') ?>'+
-            '<table width=100% cellpadding=0 cellspacing=0 class=data-input>'+
-                '<tr><td>Kode Satker:</td><td><?= form_input('kode', NULL, 'id=kode maxlength=4') ?></td></tr>'+
-                '<tr><td width=30%>Nama Unit Satker:</td><td><?= form_input('nama', NULL, 'id=nama size=40 onKeyup="javascript:this.value=this.value.toUpperCase();"') ?></td></tr>'+
-            '</table>'+
-            '</form></div>';
-    $(str).dialog({
-        title: 'Tambah Unit',
-        autoOpen: true,
-        width: 480,
-        height: 160,
-        modal: true,
-        hide: 'clip',
-        show: 'blind',
-        buttons: {
-            "Simpan": function() {
-                $('#save_unit').submit();
-            }, "Cancel": function() {
-                $(this).dialog().remove();
+        $('#reload_unit').click(function() {
+            get_list_unit();
+        });
+        
+        $('.form-control').change(function() {
+            if ($(this).val() !== '')  {
+                dc_validation_remove($(this));
             }
-        }, close: function() {
-            $(this).dialog().remove();
-        }
+        });
     });
-    $('#save_unit').submit(function() {
+    function get_list_unit(page, src, id) {
+        $.ajax({
+            url: '<?= base_url('masterdata/manage_unit') ?>/list/'+page,
+            data: 'search='+src+'&id='+id,
+            cache: false,
+            success: function(data) {
+                $('#result').html(data);
+            }
+        });
+    }
+    
+    function reset_form() {
+        $('input[type=text], input[type=hidden]').val('');
+    }
+
+    function save_satker() {
+        if ($('#kode').val() === '') {
+            dc_validation('#kode','Kode Satuan Kerja tidak boleh kosong !'); return false;
+        }
         if ($('#nama').val() === '') {
-            alert('Nama bank tidak boleh kosong !');
-            $('#nama').focus(); return false;
+            dc_validation('#nama','Nama Satuan Kerja tidak boleh kosong !'); return false;
         }
         var cek_id = $('#id_unit').val();
         $.ajax({
             url: '<?= base_url('masterdata/manage_unit/save') ?>',
             type: 'POST',
             dataType: 'json',
-            data: $(this).serialize(),
+            data: $('#form_unit').serialize(),
             cache: false,
             success: function(data) {
                 if (data.status === true) {
                     if (cek_id === '') {
-                        alert_tambah();
-                        $('input').val('');
+                        message_add_success();
+                        reset_form();
                         get_list_unit('1','',data.id_unit);
                     } else {
-                        alert_edit();
-                        $('#form_add').dialog().remove();
+                        message_edit_success();
+                        $('#datamodal').modal('hide');
                         get_list_unit($('.noblock').html(),'');
                     }
                 }
             }
         });
-        return false;
-    });
-}
+    }
 
-function edit_unit(str) {
-    var arr = str.split('#');
-    form_unit();
-    $('#id_unit').val(arr[0]);
-    $('#nama').val(arr[1]);
-    $('#kode').val(arr[2]);
-    $('#dialog_unit').dialog({ title: 'Edit unit satuan kerja' });
-}
+    function edit_unit(str) {
+        var arr = str.split('#');
+        $('#datamodal').modal('show');
+        $('#id_unit').val(arr[0]);
+        $('#nama').val(arr[1]);
+        $('#kode').val(arr[2]);
+        $('#datamodal h4').html('Edit Data Unit Satuan Kerja');
+    }
 
-function paging(page, tab, search) {
-    get_list_unit(page, search);
-}
+    function paging(page, tab, search) {
+        get_list_unit(page, search);
+    }
 
-function delete_unit(id, page) {
-    $('<div id=alert>Anda yakin akan menghapus data ini?</div>').dialog({
-        title: 'Konfirmasi Penghapusan',
-        autoOpen: true,
-        modal: true,
-        buttons: {
-            "OK": function() {
+    function delete_unit(id, page) {
+        bootbox.dialog({
+          message: "Anda yakin akan menghapus data ini?",
+          title: "Hapus Data",
+          buttons: {
+            batal: {
+              label: '<i class="fa fa-refresh"></i> Batal',
+              className: "btn-default",
+              callback: function() {
                 
+              }
+            },
+            hapus: {
+              label: '<i class="fa fa-trash-o"></i>  Hapus',
+              className: "btn-primary",
+              callback: function() {
                 $.ajax({
                     url: '<?= base_url('masterdata/manage_unit/delete') ?>?id='+id,
                     cache: false,
                     success: function() {
                         get_list_unit(page);
-                        $('#alert').dialog().remove();
+                        message_delete_success();
+                    },
+                    error: function() {
+                        message_delete_failed();
                     }
                 });
-            },
-            "Cancel": function() {
-                $(this).dialog().remove();
+              }
             }
-        }
-    });
-}
+          }
+        });
+    }
 </script>
+<div class="titling"><h1><?= $title ?></h1></div>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masterdata</a></li>
+    <li class="active">Data Unit</li>
+</ol>
 <div class="kegiatan">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Unit Satuan Kerja</a></li>
-        </ul>
-        <div id="tabs-1">
-            <button id="add_unit">Tambah Data</button>
-            <button id="reload_unit">Refresh</button>
-            <div id="result">
-
+    <button class="btn btn-primary" id="add_unit"><i class="fa fa-plus-circle"></i> Tambah Data</button>
+    <button class="btn btn-default" id="reload_unit"><i class="fa fa-refresh"></i> Reload Data</button>
+    <div id="result"></div>
+</div>
+<div id="datamodal" class="modal fade">
+<div class="modal-dialog" style="width: 600px;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="modal_title"></h4>
+    </div>
+    <div class="modal-body">
+    <form action="" id="form_unit" role="form" class="form-horizontal">
+        <input type="hidden" name="id_unit" id="id_unit" />
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Kode Satker:</label>
+            <div class="col-lg-8">
+                <input type="text" name="kode" id="kode" class="form-control" />
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Nama Satker:</label>
+            <div class="col-lg-8">
+                <input type="text" name="nama" id="nama" class="form-control"onKeyup="javascript:this.value=this.value.toUpperCase();"/>
+            </div>
+        </div>
+    </form>
     </div>
-</div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
+      <button type="button" class="btn btn-primary" id="save" onclick="save_satker();"><i class="fa fa-save"></i> Simpan</button>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

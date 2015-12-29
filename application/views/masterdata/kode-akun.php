@@ -1,5 +1,4 @@
 <title><?= $title ?></title>
-<div class="titling"><h1><?= $title ?></h1></div>
 <?= $this->load->view('message') ?>
 <script type="text/javascript">
 $(function() {
@@ -31,15 +30,14 @@ function get_list_rekening(page) {
     });
 }
 </script>
+<div class="titling"><h1><?= $title ?></h1></div>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masterdata</a></li>
+    <li class="active">Data Rekening</li>
+</ol>
 <div class="kegiatan">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Kode Rekening</a></li>
-        </ul>
-        <div id="tabs-1">
-            <button id="add-rekening">Tambah Rekening</button>
-            <button id="reset">Reload Data</button>
-            <div id="list_rekening"></div>
-            </div>
-        </div>
+    <button class="btn btn-primary" id="add-rekening"><i class="fa fa-plus-circle"></i> Tambah</button>
+    <button class="btn" id="reset"><i class="fa fa-refresh"></i> Reload Data</button>
+    <div id="list_rekening"></div>
 </div>

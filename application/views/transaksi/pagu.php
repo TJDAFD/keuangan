@@ -1,5 +1,4 @@
 <title><?= $title ?></title>
-<div class="titling"><h1><?= $title ?></h1></div>
 <?= $this->load->view('message') ?>
 <script type="text/javascript">
 $(function() {
@@ -134,19 +133,21 @@ function delete_pagu(id, page) {
     });
 }
 </script>
+<div class="titling"><h1><?= $title ?></h1></div>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masterdata</a></li>
+    <li class="active">Data Pagu Kegiatan</li>
+</ol>
 <div class="kegiatan">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Pagu Anggaran</a></li>
-        </ul>
-        <div id="tabs-1">
-            <button id="add_pagu">Tambah Data</button>
-            <button id="reload_pagu">Refresh</button>
-            <div class="searching-box">
-            <select name="tahun" id="tahun"><option value="">Pilih  tahun ...</option><?php for($i = 2013; $i <= date("Y")+1; $i++) { ?><option value="<?= $i ?>"><?= $i ?></option><?php } ?></select>
-            </div>
-            <div id="result">
+    
+    <button id="add_pagu" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah</button>
+    <button id="reload_pagu" class="btn"><i class="fa fa-refresh"></i> Reload Data</button>
+    <div class="searching-box">
+        <select name="tahun" id="tahun" class="form-control"><option value="">Pilih  tahun ...</option><?php for($i = 2013; $i <= date("Y")+1; $i++) { ?><option value="<?= $i ?>"><?= $i ?></option><?php } ?></select>
+    </div>
+    <div id="result">
 
-            </div>
-        </div>
+    </div>
+
 </div>

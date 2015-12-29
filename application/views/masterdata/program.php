@@ -170,8 +170,8 @@ function delete_program(id, page) {
     });
 }
 </script>
-<button id="add_program">Tambah Data</button>
-<button id="reload_program">Refresh</button>
+<button id="add_program" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah Data</button>
+<button id="reload_program" class="btn"><i class="fa fa-refresh"></i> Reload Data</button>
 <div id="result-program">
 
 </div>

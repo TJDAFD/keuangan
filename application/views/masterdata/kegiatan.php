@@ -5,7 +5,7 @@
 </div>
 <script type="text/javascript">
 $(function() {
-    $('#tabs').tabs();
+    $('#tabs a:first').tab('show');
     load_my_fucking_page('<?= base_url('masterdata/program') ?>','#tabs-1');
 });
 function load_my_fucking_page(url, el) {
@@ -47,23 +47,29 @@ function paginate(page, tab, search, active) {
     }
 }
 </script>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masterdata</a></li>
+    <li class="active">Data Pagu Kegiatan</li>
+</ol>
 <div class="kegiatan">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1" onclick="load_my_fucking_page('<?= base_url('masterdata/program') ?>','#tabs-1');">Program</a></li>
-            <li><a href="#tabs-2" onclick="load_my_fucking_page('<?= base_url('masterdata/keg_program') ?>','#tabs-2');">Kegiatan</a></li>
-            <li><a href="#tabs-3" onclick="load_my_fucking_page('<?= base_url('masterdata/sub_kegiatan') ?>','#tabs-3');">Sub Kegiatan</a></li>
-            <li><a href="#tabs-4" onclick="load_my_fucking_page('<?= base_url('masterdata/uraian') ?>','#tabs-4');">Uraian</a></li>
-            <!--<li><a href="#tabs-5" onclick="load_my_fucking_page('<?= base_url('masterdata/sub_uraian') ?>','#tabs-5');">Sub Uraian</a></li>-->
+    
+    <ul id="tabs" class="nav nav-tabs">
+        <li class="link_tab" id="tabs1"><a href="#tabs-1" data-toggle="tab" onclick="load_my_fucking_page('<?= base_url('masterdata/program') ?>','#tabs-1');">Program</a></li>
+        <li class="link_tab" id="tabs2"><a href="#tabs-2" data-toggle="tab" onclick="load_my_fucking_page('<?= base_url('masterdata/keg_program') ?>','#tabs-2');">Kegiatan</a></li>
+        <li class="link_tab" id="tabs3"><a href="#tabs-3" data-toggle="tab" onclick="load_my_fucking_page('<?= base_url('masterdata/sub_kegiatan') ?>','#tabs-3');">Sub Kegiatan</a></li>
+        <li class="link_tab" id="tabs4"><a href="#tabs-4" data-toggle="tab" onclick="load_my_fucking_page('<?= base_url('masterdata/uraian') ?>','#tabs-4');">Uraian</a></li>
+        <!--<li><a href="#tabs-5" onclick="load_my_fucking_page('<?= base_url('masterdata/sub_uraian') ?>','#tabs-5');">Sub Uraian</a></li>-->
 <!--            <li><a href="#tabs-6" onclick="load_my_fucking_page('<?= base_url('masterdata/sub_sub_uraian') ?>','#tabs-6');">Sub Sub Uraian</a></li>-->
-            <li><a href="#tabs-7" onclick="load_my_fucking_page('<?= base_url('masterdata/kegiatan_preview') ?>','#tabs-7');">Preview</a></li>
-        </ul>
-        <div id="tabs-1"></div>
-        <div id="tabs-2"></div>
-        <div id="tabs-3"></div>
-        <div id="tabs-4"></div>
+        <li class="link_tab" id="tabs5"><a href="#tabs-5" data-toggle="tab" onclick="load_my_fucking_page('<?= base_url('masterdata/kegiatan_preview') ?>','#tabs-5');">Preview</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" id="tabs-1"></div>
+        <div class="tab-pane" id="tabs-2"></div>
+        <div class="tab-pane" id="tabs-3"></div>
+        <div class="tab-pane" id="tabs-4"></div>
         <!--<div id="tabs-5"></div>-->
-<!--        <div id="tabs-6"></div>-->
-        <div id="tabs-7"></div>
+    <!--        <div id="tabs-6"></div>-->
+        <div class="tab-pane" id="tabs-5"></div>
     </div>
 </div>

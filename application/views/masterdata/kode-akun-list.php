@@ -647,10 +647,10 @@ $('.edit_sub_sub').click(function() {
     <div id="dialog_form"></div>
     <table class="tabel-advance list-data" width="100%" id="example-advanced">
         <tr>
-            <th width="15%">Kode</th>
-            <th width="55%">Nama Rekening</th>
-            <th width="5%">D / C</th>
-            <th width="25%">Aksi</th>
+            <th width="15%" class="left">Kode</th>
+            <th width="55%" class="left">Nama Rekening</th>
+            <th width="5%" class="left">D / C</th>
+            <th width="25%"></th>
         </tr>
         <?php 
         // Rekening
@@ -659,9 +659,9 @@ $('.edit_sub_sub').click(function() {
             <td><?= anchor('', $data->id, 'class=edit_rek id="'.$data->id.'#'.$data->nama.'#'.$data->posisi.'"') ?></td>
             <td><?= $data->rekening ?></td>
             <td><?= $data->posisi ?></td>
-            <td>
-                <button type="button" class="btn btn-default btn-xs" onclick="deleteMe(this, '<?= base_url('masterdata/delete_rekening/'.$data->id) ?>')"><i class="fa fa-minus-circle"></i> Hapus</button>
-                <button type="button" class="btn btn-default btn-xs add_subrekening" id="<?= $data->id ?>"><i class="fa fa-plus-circle"></i> Tambah Sub</button>
+            <td align="right">
+                <button type="button" class="btn btn-default btn-xs" onclick="deleteMe(this, '<?= base_url('masterdata/delete_rekening/'.$data->id) ?>')"><i class="fa fa-trash"></i></button>
+                <button type="button" class="btn btn-default btn-xs add_subrekening" id="<?= $data->id ?>"><i class="fa fa-plus-circle"></i></button>
         </tr>
         <?php 
             // Sub Rekening
@@ -678,9 +678,9 @@ $('.edit_sub_sub').click(function() {
                     <td><?= anchor('', $rows->id, 'class=edit_sub_rek id="'.$data->id.'#'.$rows->id.'#'.$rows->nama.'"') ?></td>
                     <td style="padding-left: 15px;"><?= $rows->nama ?></td>
                     <td><?= $data->posisi ?></td>
-                    <td style="padding-left: 15px;">
-                        <button type="button" class="btn btn-default btn-xs" onclick="deleteMe(this, '<?= base_url('masterdata/delete_subrekening/'.$rows->id) ?>')"><i class="fa fa-minus-circle"></i> Hapus</button>
-                        <button type="button" class="btn btn-default btn-xs add_subsubrekening" title="<?= $rows->id.'#'.$rows->nama.'#'.$data->nama.'#'.$data->id ?>" id="<?= $rows->id.'#'.$rows->nama.'#'.$data->nama.'#'.$data->id ?>"><i class="fa fa-plus-circle"></i> Tambah Sub</button>
+                    <td align="right">
+                        <button type="button" class="btn btn-default btn-xs" onclick="deleteMe(this, '<?= base_url('masterdata/delete_subrekening/'.$rows->id) ?>')"><i class="fa fa-trash"></i></button>
+                        <button type="button" class="btn btn-default btn-xs add_subsubrekening" title="<?= $rows->id.'#'.$rows->nama.'#'.$data->nama.'#'.$data->id ?>" id="<?= $rows->id.'#'.$rows->nama.'#'.$data->nama.'#'.$data->id ?>"><i class="fa fa-plus-circle"></i></button>
                     </td>
                 </tr>
                     <?php 
@@ -690,9 +690,9 @@ $('.edit_sub_sub').click(function() {
                             <td><?= anchor('', $rowx->id, 'class=edit_sub_sub id="'.$rowx->id.'#'.$rows->nama.'#'.$rowx->id_subrekening.'#'.$rowx->nama.'"') ?></td>
                             <td style="padding-left: 30px;"><?= $rowx->nama ?></td>
                             <td><?= $data->posisi ?></td>
-                            <td style="padding-left: 30px;">
-                                <button type="button" class="btn btn-default btn-xs" onclick="deleteMe(this, '<?= base_url('masterdata/delete_subsubrekening/'.$rowx->id) ?>')"><i class="fa fa-minus-circle"></i> Hapus</button>
-                                <button type="button" class="btn btn-default btn-xs add_subsubsubrekening" id="<?= $rowx->id.'#'.$rowx->nama ?>"><i class="fa fa-plus-circle"></i> Tambah Sub</button>
+                            <td align="right">
+                                <button type="button" class="btn btn-default btn-xs" onclick="deleteMe(this, '<?= base_url('masterdata/delete_subsubrekening/'.$rowx->id) ?>')"><i class="fa fa-trash"></i></button>
+                                <button type="button" class="btn btn-default btn-xs add_subsubsubrekening" id="<?= $rowx->id.'#'.$rowx->nama ?>"><i class="fa fa-plus-circle"></i></button>
                             </td>
                         </tr>
                         <?php
@@ -704,9 +704,9 @@ $('.edit_sub_sub').click(function() {
                                 <td><?= anchor('',$rowy->id,'class=edit_sss id="'.$str_s4.'"') ?></td>
                                 <td style="padding-left: 45px;"><?= $rowy->nama ?></td>
                                 <td><?= $data->posisi ?></td>
-                                <td style="padding-left: 45px;">
-                                    <button type="button" class="btn btn-default btn-xs delete" onclick="deleteMe(this, '<?= base_url('masterdata/delete_subsubsubrekening/'.$rowy->id) ?>')"><i class="fa fa-minus-circle"></i> Hapus</button>
-                                    <button type="button" class="btn btn-default btn-xs add_subsubsubsubrekening" id="<?= $rowy->id_sub_sub_sub_rekening.'#'.$rowy->nama ?>"><i class="fa fa-plus-circle"></i> Tambah Sub</button>
+                                <td align="right">
+                                    <button type="button" class="btn btn-default btn-xs delete" onclick="deleteMe(this, '<?= base_url('masterdata/delete_subsubsubrekening/'.$rowy->id) ?>')"><i class="fa fa-trash"></i></button>
+                                    <button type="button" class="btn btn-default btn-xs add_subsubsubsubrekening" id="<?= $rowy->id_sub_sub_sub_rekening.'#'.$rowy->nama ?>"><i class="fa fa-plus-circle"></i></button>
                                 </td>
                             </tr>
                         <?php
@@ -718,8 +718,8 @@ $('.edit_sub_sub').click(function() {
                                     <td><?= anchor('',$rowz->id,'class=edit_ssss id="'.$str_s5.'"') ?></td>
                                     <td style="padding-left: 60px;"><?= $rowz->sub_sub_sub_sub_rekening ?></td>
                                     <td><?= $data->posisi ?></td>
-                                    <td style="padding-left: 60px;">
-                                        <button type="button" class="btn btn-default btn-xs delete" onclick="deleteMe(this, '<?= base_url('masterdata/delete_subsubsubsubrekening/'.$rowz->id) ?>')"><i class="fa fa-minus-circle"></i> Hapus</button>
+                                    <td align="right">
+                                        <button type="button" class="btn btn-default btn-xs delete" onclick="deleteMe(this, '<?= base_url('masterdata/delete_subsubsubsubrekening/'.$rowz->id) ?>')"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                             <?php

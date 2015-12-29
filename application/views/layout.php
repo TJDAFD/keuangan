@@ -16,7 +16,7 @@
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/jquery.treetable.css') ?>" media="all" />
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/jquery.treetable.theme.default.css') ?>" media="all" />
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css') ?>" media="all" />
-        <link rel="stylesheet" type="text/css" href="<?= base_url('assets/font-awesome/css/font-awesome.min.css') ?>" media="all" />
+        <link rel="stylesheet" type="text/css" href="<?= base_url('assets/font-awesome-4.4.0/css/font-awesome.min.css') ?>" media="all" />
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/datepicker3.css') ?>" media="all" />
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/pnotify/jquery.pnotify.default.css') ?>" media="all" />
         
