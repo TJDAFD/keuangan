@@ -4,19 +4,20 @@
     $(function() {
         $('#tabs').tabs();
         //get_data_series();
-        $('#cari_button_cashbon').button({
-            icons: {
-                secondary: 'ui-icon-search'
+        $('#cari_button_cashbon').click(function() {
+            if ($('#id_satker').val() === '') {
+                dc_validation('#id_satker','Satker harus dipilih !'); return false;
             }
-        }).click(function() {
+            dc_validation_remove('#id_satker');
             get_data_series();
         });
-        $('#reload_cashbon').button({
-            icons: {
-                secondary: 'ui-icon-refresh'
-            }
-        }).click(function() {
+        $('#reload_cashbon').click(function() {
             $('#loaddata').load('<?= base_url('laporan/grafik') ?>');
+        });
+        $('.form-control').change(function() {
+            if ($(this).val() !== '') {
+                dc_validation_remove($(this));
+            }
         });
     });
     function get_data_series(){
@@ -74,24 +75,37 @@
        });
    }
 </script>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Report</a></li>
+    <li class="active">Grafik Renbut & Realisasi</li>
+</ol>
 <div class="kegiatan">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Entri Rencana Kebutuhan</a></li>
-        </ul>
-        <div id="tabs-1">
-
-        <div class="inputan">
-            <table width="100%" cellspacing="0">
-                <tr><td width=10%>Tahun:</td><td><select name="year" id="year" style="width: 72px;"><option value="">Select Year ....</option><?php for($i = 2010; $i <= date("Y"); $i++) { ?> <option value="<?= $i ?>" <?php if ($i == date("Y")) echo "selected"; else echo ""; ?>><?= $i ?></option><?php } ?></select></td></tr>
-                <tr><td>Satuan Kerja:</td><td><select name=id_satker id=id_satker><option value="">Pilih Satker ...</option><?php foreach ($satker as $data) { ?><option value="<?= $data->id ?>" <?= ($data->id == 1)?'selected':NULL ?>><?= $data->nama ?></option><?php } ?></select></td></tr>
-                <tr><td></td><td>
-                    <button class="btn" id="cari_button_cashbon"><i class="fa fa-eye"></i> Tampilkan Grafik</button>
-                    <button class="btn" id="reload_cashbon"><i class="fa fa-refresh"></i> Refresh</button>
-                </td></tr>
-            </table>
-        </div><br/><br/>
-        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-        </div>
-    </div>
+    <div class="inputan">
+        <form action="" id="search_kasbank" role="form" class="form-horizontal">
+            <div class="form-group">
+                <label class="col-lg-1 control-label">Tahun:</label>
+                <div class="col-lg-8">
+                    <select class="form-control" name="year" id="year" style="width: 300px;"><option value="">Select Year ....</option><?php for($i = 2010; $i <= date("Y"); $i++) { ?> <option value="<?= $i ?>" <?php if ($i == date("Y")) echo "selected"; else echo ""; ?>><?= $i ?></option><?php } ?></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-1 control-label">Satker:</label>
+                <div class="col-lg-8">
+                    <select class="form-control" name=id_satker id=id_satker style="width: 300px;"><option value="">Pilih Satker ...</option><?php foreach ($satker as $data) { ?><option value="<?= $data->id ?>" <?= ($data->id == 1)?'selected':NULL ?>><?= $data->nama ?></option><?php } ?></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-1 control-label"></label>
+                <div class="col-lg-8">
+                    <button type="button" class="btn" id="cari_button_cashbon"><i class="fa fa-eye"></i> Tampilkan Grafik</button>
+                    <button type="button" class="btn" id="reload_cashbon"><i class="fa fa-refresh"></i> Clear Grafik</button>
+                </div>
+            </div>
+            <div class="modal-footer" >
+                
+            </div>
+        </form>
+    </div><br/><br/>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 </div>

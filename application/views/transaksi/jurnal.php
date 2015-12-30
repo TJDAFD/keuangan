@@ -23,13 +23,14 @@
             $(this).datepicker('hide');
         });
 
-        $('#tabs').tabs();
+        $('#tabs a:first').tab('show');
         $('#simpan').click(function() {
             $('#form').submit();
         });
 
         $('#add_jurnal').click(function() {
             $('#datamodal_tambah_jurnal').modal('show');
+            $('#rows_debet, #rows_kredit').empty();
             rek_debet_add_row();
             rek_kredit_add_row();
         });
@@ -605,21 +606,26 @@
         <li class="active">Data Penerbang</li>
     </ol>
     <div class="kegiatan">
-        <div id="tabs">
-            <ul>
-                <li><a href="#tabs-1">Verifikasi Data</a></li>
-                <li><a href="#tabs-2">Jurnal Transaksi</a></li>
-            </ul>
-            <div id="tabs-1">
-                <button class="btn" id="cari_verifikasi"><i class="fa fa-search"></i> Cari</button>
-                <button class="btn" id="reload_verifikasi"><i class="fa fa-refresh"></i> Reload Data</button>
-                <div id="result_verifikasi"></div>
+        
+        <ul id="tabs" class="nav nav-tabs">
+            <li class="link_tab" id="tabs1"><a data-toggle="tab" href="#tabs-1">Verifikasi Data</a></li>
+            <li class="link_tab" id="tabs2"><a data-toggle="tab" href="#tabs-2">Jurnal Transaksi</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane" id="tabs-1">
+                <div style="margin-top: 5px;">
+                    <button class="btn" id="cari_verifikasi"><i class="fa fa-search"></i> Cari</button>
+                    <button class="btn" id="reload_verifikasi"><i class="fa fa-refresh"></i> Reload Data</button>
+                    <div id="result_verifikasi"></div>
+                </div>
             </div>
-            <div id="tabs-2">
-                <button class="btn btn-primary" id="add_jurnal"><i class="fa fa-plus-circle"></i> Tambah Data</button>
-                <button class="btn" id="cari_jurnal"><i class="fa fa-search"></i> Cari</button>
-                <button class="btn" id="reload"><i class="fa fa-refresh"></i> Reload Data</button>
-                <div id="result"></div>
+            <div class="tab-pane" id="tabs-2">
+                <div style="margin-top: 5px;">
+                    <button class="btn btn-primary" id="add_jurnal"><i class="fa fa-plus-circle"></i> Tambah Data</button>
+                    <button class="btn" id="cari_jurnal"><i class="fa fa-search"></i> Cari</button>
+                    <button class="btn" id="reload"><i class="fa fa-refresh"></i> Reload Data</button>
+                    <div id="result"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -628,7 +634,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="modal_title"></h4>
+          <h4 class="modal-title" id="modal_title">Tambah Jurnal Transaksi</h4>
         </div>
         <div class="modal-body">
         <?= form_open('', 'id=form role="form" class="form-horizontal"') ?>

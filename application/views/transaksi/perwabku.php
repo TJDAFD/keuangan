@@ -231,19 +231,18 @@
         });
     }
 </script>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Transaksi</a></li>
+    <li class="active">Perwabku</li>
+</ol>
 <div class="kegiatan">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Entri Perwabku</a></li>
-        </ul>
-        <div id="tabs-1">
-            <button class="btn btn-primary" id="add_perwabku"><i class="fa fa-plus-circle"></i> Tambah</button>
-            <button class="btn" id="cari_button"><i class="fa fa-search"></i> Cari</button>
-            <button class="btn" id="reload_perwabku"><i class="fa fa-refresh"></i> Reload Data</button>
-            <div id="result">
+    
+    <button class="btn btn-primary" id="add_perwabku"><i class="fa fa-plus-circle"></i> Tambah</button>
+    <button class="btn" id="cari_button"><i class="fa fa-search"></i> Cari</button>
+    <button class="btn" id="reload_perwabku"><i class="fa fa-refresh"></i> Reload Data</button>
+    <div id="result">
 
-            </div>
-        </div>
     </div>
     
     <div id="datamodal_tambah" class="modal fade">

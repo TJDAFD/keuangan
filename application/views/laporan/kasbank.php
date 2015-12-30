@@ -71,33 +71,32 @@
         }
     }
 </script>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Report</a></li>
+    <li class="active">Catatan Kas dan Bank</li>
+</ol>
 <div class="kegiatan">
-    <div id="tabs_kasbank">
-        <ul>
-            <li><a href="#tabss-1">Parameter</a></li>
-        </ul>
-        <div id="tabss-1">
-            <button class="btn" id="cari_kasbank"><i class="fa fa-search"></i> Cari</button>
-            <button class="btn" id="excel_kasbank"><i class="fa fa-file-text-o"></i> Export Excel</button>
-            <!--<button id="reload_kasbank">Reload Data</button>-->
-        <div id="result">
-            <table class="list-data" width="100%">
-                <thead>
-                <tr>
-                    <th width="3%">NO.</th>
-                    <th width="7%">NO. BUKTI</th>
-                    <th width="5%">TGL</th>
-                    <th width="5%">No.Rek</th>
-                    <th width="20%" class="left">Nama Rekening</th>
-                    <th width="32%" class="left">Keterangan</th>
-                    <th width="9%" class="right">DEBET</th>
-                    <th width="9%" class="right">KREDIT</th>
-                    <th width="9%" class="right">SALDO</th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-        </div>
+    
+    <button class="btn" id="cari_kasbank"><i class="fa fa-search"></i> Cari</button>
+    <button class="btn" id="excel_kasbank"><i class="fa fa-file-text-o"></i> Export Excel</button>
+        <!--<button id="reload_kasbank">Reload Data</button>-->
+    <div id="result">
+        <table class="list-data" width="100%">
+            <thead>
+            <tr>
+                <th width="3%">NO.</th>
+                <th width="7%">NO. BUKTI</th>
+                <th width="5%">TGL</th>
+                <th width="5%">No.Rek</th>
+                <th width="20%" class="left">Nama Rekening</th>
+                <th width="32%" class="left">Keterangan</th>
+                <th width="9%" class="right">DEBET</th>
+                <th width="9%" class="right">KREDIT</th>
+                <th width="9%" class="right">SALDO</th>
+            </tr>
+            </thead>
+        </table>
     </div>
     <div id="datamodal" class="modal fade">
     <div class="modal-dialog" style="width: 600px;">

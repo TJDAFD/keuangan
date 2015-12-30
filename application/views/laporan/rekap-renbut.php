@@ -51,20 +51,20 @@ function paging(page) {
     get_list_rekap_renbut(page);
 }
 </script>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Report</a></li>
+    <li class="active">Rekap Renbut</li>
+</ol>
 <div class="kegiatan">
-    <div id="tabx">
-        <ul>
-            <li><a href="#tabs-1"><?= $title ?></a></li>
-        </ul>
-        <div id="tabs-1">
-            <button class="btn" id="cari_rekap_button"><i class="fa fa-search"></i> Cari</button>
-            <button class="btn" id="print_excel"><i class="fa fa-file-text-o"></i> Export Excel</button>
-            <button class="btn" id="reload_rekap_renbut"><i class="fa fa-refresh"></i> Reload Data</button>
-            <div id="result-rekap">
+    
+    <button class="btn" id="cari_rekap_button"><i class="fa fa-search"></i> Cari</button>
+    <button class="btn" id="print_excel"><i class="fa fa-file-text-o"></i> Export Excel</button>
+    <button class="btn" id="reload_rekap_renbut"><i class="fa fa-refresh"></i> Reload Data</button>
+    <div id="result-rekap">
 
-            </div>
-        </div>
     </div>
+
     <div id="datamodal" class="modal fade">
     <div class="modal-dialog" style="width: 600px;">
       <div class="modal-content">

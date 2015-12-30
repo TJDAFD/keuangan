@@ -134,20 +134,20 @@ function paging(p) {
     get_list_rekap_rekap_realisasi_pb(p);
 }
 </script>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Report</a></li>
+    <li class="active">Rekap Realisasi</li>
+</ol>
 <div class="kegiatan">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Parameter</a></li>
-        </ul>
-        <div id="tabs-1">
-            <button class="btn" id="cari_button_realisasi"><i class="fa fa-search"></i> Cari</button>
-            <button class="btn" id="excel_rekap_realisasi_pb"><i class="fa fa-file-text"></i> Export Excel</button>
-            <button class="btn" id="reload_rekap_realisasi_pb_data"><i class="fa fa-refresh"></i> Reload Data</button>
-            <div id="result-rekap_realisasi_pb">
+    
+    <button class="btn" id="cari_button_realisasi"><i class="fa fa-search"></i> Cari</button>
+    <button class="btn" id="excel_rekap_realisasi_pb"><i class="fa fa-file-text"></i> Export Excel</button>
+    <button class="btn" id="reload_rekap_realisasi_pb_data"><i class="fa fa-refresh"></i> Reload Data</button>
+    <div id="result-rekap_realisasi_pb">
 
-            </div>
-        </div>
     </div>
+
     <div id="datamodal_rekap_pb" class="modal fade">
     <div class="modal-dialog" style="width: 700px;">
       <div class="modal-content">

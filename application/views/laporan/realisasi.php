@@ -113,19 +113,18 @@
         get_list_realisasi(page, search);
     }
 </script>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Report</a></li>
+    <li class="active">Laporan Anggaran dan Realisasi</li>
+</ol>
 <div class="kegiatan">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1"><?= $title ?></a></li>
-        </ul>
-        <div id="tabs-1">
-            <button class="btn" id="cari_button"><i class="fa fa-search"></i> Cari</button>
-            <button class="btn" id="excel_realisasi"><i class="fa fa-file-text-o"></i> Export Excel</button>
-            <button class="btn" id="reload_realisasi"><i class="fa fa-refresh"></i> Reload Data</button>
-            <div id="result" style="overflow-x: auto;">
+    
+    <button class="btn" id="cari_button"><i class="fa fa-search"></i> Cari</button>
+    <button class="btn" id="excel_realisasi"><i class="fa fa-file-text-o"></i> Export Excel</button>
+    <button class="btn" id="reload_realisasi"><i class="fa fa-refresh"></i> Reload Data</button>
+    <div id="result" style="overflow-x: auto;">
 
-            </div>
-        </div>
     </div>
     <div id="datamodal" class="modal fade">
     <div class="modal-dialog" style="width: 600px;">

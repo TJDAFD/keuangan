@@ -202,18 +202,18 @@
         });
     }
 </script>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Transaksi</a></li>
+    <li class="active">Anggaran Kegiatan</li>
+</ol>
 <div class="kegiatan">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Entri <?= $title ?></a></li>
-        </ul>
-        <div id="tabs-1">
-            <button class="btn btn-primary" id="add_sub_uraian"><i class="fa fa-plus-circle"></i> Tambah</button>
-            <button class="btn" id="cari_button"><i class="fa fa-search"></i> Cari</button>
-            <button class="btn" id="reload_sub_uraian"><i class="fa fa-refresh"></i> Reload Data</button>
-            <div id="result-sub_uraian"></div>
-        </div>
-    </div>
+    
+    <button class="btn btn-primary" id="add_sub_uraian"><i class="fa fa-plus-circle"></i> Tambah</button>
+    <button class="btn" id="cari_button"><i class="fa fa-search"></i> Cari</button>
+    <button class="btn" id="reload_sub_uraian"><i class="fa fa-refresh"></i> Reload Data</button>
+    <div id="result-sub_uraian"></div>
+     
     <div id="datamodal_tambah" class="modal fade">
     <div class="modal-dialog" style="width: 700px;">
       <div class="modal-content">

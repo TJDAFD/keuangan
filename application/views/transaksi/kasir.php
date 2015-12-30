@@ -506,20 +506,19 @@
         get_list_rekap_kasir(p);
     }
 </script>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Transaksi</a></li>
+    <li class="active">Kasir</li>
+</ol>
 <div class="kegiatan">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Parameter</a></li>
-        </ul>
-        <div id="tabs-1">
-            <button class="btn btn-primary" id="tambah_button"><i class="fa fa-plus-circle"></i> Tambah</button>
-            <button class="btn" id="cari_button"><i class="fa fa-search"></i> Cari</button>
-            <button class="btn" id="excel_kasir"><i class="fa fa-file-text-o"></i> Export Excel</button>
-            <button class="btn" id="reload_kasir_data"><i class="fa fa-refresh"></i> Reload Data</button>
-            <div id="result-kasir">
+    
+    <button class="btn btn-primary" id="tambah_button"><i class="fa fa-plus-circle"></i> Tambah</button>
+    <button class="btn" id="cari_button"><i class="fa fa-search"></i> Cari</button>
+    <button class="btn" id="excel_kasir"><i class="fa fa-file-text-o"></i> Export Excel</button>
+    <button class="btn" id="reload_kasir_data"><i class="fa fa-refresh"></i> Reload Data</button>
+    <div id="result-kasir">
 
-            </div>
-        </div>
     </div>
     <div id="datamodal_tambah" class="modal fade" style="overflow-y: auto">
     <div class="modal-dialog" style="width: 820px;">

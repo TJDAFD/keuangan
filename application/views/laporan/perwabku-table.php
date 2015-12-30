@@ -19,7 +19,7 @@
         <th width="1%"></th>
     </tr>
     <?php foreach ($list_data as $key => $data) { ?>
-    <tr class="<?= ($key%2==1)?'even':'odd' ?>">
+    <tr valign="top" class="<?= ($key%2==1)?'even':'odd' ?>">
         <td align="center"><?= $auto++ ?></td>
         <?php if ($cari['satker'] === '') { ?>
         <td><?= $data->satker ?></td>
