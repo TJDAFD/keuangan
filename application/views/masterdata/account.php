@@ -1,19 +1,11 @@
 <script type="text/javascript">
     $(function() {
         get_user_list(1);
-        $('#add-user-account').button({
-            icons: {
-                secondary: 'ui-icon-newwin'
-            }
-        }).click(function() {
+        $('#add-user-account').click(function() {
             form_user_account();
         });
         
-        $('#reset-user-account').button({
-            icons: {
-                secondary: 'ui-icon-refresh'
-            }
-        }).click(function() {
+        $('#reset-user-account').click(function() {
             get_user_list(1);
         });
     });
@@ -146,6 +138,6 @@
 
 
 </script>
-<button id="add-user-account">Tambah User Account</button>
-<button id="reset-user-account">Reset</button>
+<button id="add-user-account" class="btn btn-primary">Tambah User</button>
+<button id="reset-user-account" class="btn">Reset</button>
 <div id="user_list"></div>

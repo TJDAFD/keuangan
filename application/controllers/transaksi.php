@@ -639,4 +639,58 @@ class Transaksi extends CI_Controller {
         }
         echo "OK";
     }
+    
+    function insert_rekening() {
+        $result = $this->db->query("select * from kasir order by id")->result();
+        foreach ($result as $data) {
+            $get_parent = $this->db->query("select id, kode from rekening where kode = '".$data->id_rekening."'")->row();
+            $get_parent1= $this->db->query("select id, kode from rekening where kode = '".$data->id_rekening_pwk."'")->row();
+            $data_insert= array(
+                'id_rekening' => $get_parent->id,
+                'id_rekening_pwk' => isset($get_parent1->id)?$get_parent1->id:NULL
+            );
+            $this->db->where('id', $data->id);
+            $this->db->update('kasir', $data_insert);
+        }
+        echo "OK FUCK";
+    }
+    
+    function insert_rekening2() {
+        $result = $this->db->query("select * from penerimaan order by id")->result();
+        foreach ($result as $data) {
+            $get_parent = $this->db->query("select id, kode from rekening where kode = '".$data->id_rekening."'")->row();
+            $data_insert= array(
+                'id_rekening' => $get_parent->id
+            );
+            $this->db->where('id', $data->id);
+            $this->db->update('penerimaan', $data_insert);
+        }
+        echo "OK FUCK";
+    }
+    
+    function insert_rekening3() {
+        $result = $this->db->query("select * from jurnal order by id")->result();
+        foreach ($result as $data) {
+            $get_parent = $this->db->query("select id, kode from rekening where kode = '".$data->id_rekening."'")->row();
+            $data_insert= array(
+                'id_rekening' => $get_parent->id
+            );
+            $this->db->where('id', $data->id);
+            $this->db->update('jurnal', $data_insert);
+        }
+        echo "OK FUCK";
+    }
+    
+    function insert_rekening4() {
+        $result = $this->db->query("select * from rencana_kebutuhan order by id_renbut")->result();
+        foreach ($result as $data) {
+            $get_parent = $this->db->query("select id, kode from rekening where kode = '".$data->id_akun_rekening."'")->row();
+            $data_insert= array(
+                'id_akun_rekening' => isset($get_parent->id)?$get_parent->id:NULL
+            );
+            $this->db->where('id_renbut', $data->id_renbut);
+            $this->db->update('rencana_kebutuhan', $data_insert);
+        }
+        echo "OK FUCK";
+    }
 }

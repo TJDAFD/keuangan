@@ -10,13 +10,13 @@
             my_ajax('<?= base_url() ?>masterdata/user_group','#tab1');
             $('#tabs-1').click(function(){
                 if($('#tab1').html()=== ''){
-                    my_ajax('<?= base_url('masterdata/user_group') ?>','#group');
+                    my_ajax('<?= base_url('masterdata/user_group') ?>','#tab1');
                 }
                 
             });
             $('#tabs-2').click(function(){
                 if($('#tab2').html()=== ''){
-                    my_ajax('<?= base_url('masterdata/user_account') ?>','#user');
+                    my_ajax('<?= base_url('masterdata/user_account') ?>','#tab2');
                 }
             });
         });
@@ -46,16 +46,6 @@
             }
         }
     </script>
-
-<!--    <div id="tabs">
-        <ul>
-            <li><a class="group" href="#group">User Group</a></li>
-            <li><a class="user" href="#user">User Account</a></li>
-        </ul>
-
-        <div id="group"></div>
-        <div id="user"></div>
-    </div>-->
     
     <ul id="mytab" class="nav nav-tabs">
         <li class="link_tab" id="tabs-1"><a href="#tab1" data-toggle="tab"> Level User</a></li>

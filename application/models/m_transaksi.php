@@ -681,8 +681,8 @@ class M_transaksi extends CI_Model {
                 s.nama as rekening, ss.nama as rekening_pwk
                 from kasir pg
                 left join uraian u on (pg.id_uraian = u.id)
-                left join sub_sub_sub_sub_rekening s on (pg.id_rekening = s.id)
-                left join sub_sub_sub_sub_rekening ss on (pg.id_rekening_pwk = ss.id)
+                left join rekening s on (pg.id_rekening = s.id)
+                left join rekening ss on (pg.id_rekening_pwk = ss.id)
                 where pg.id is not NULL $q order by pg.id desc";
         $limitation = null;
         if ($limit !== NULL) {

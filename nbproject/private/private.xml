@@ -17,6 +17,24 @@
             <file>file:/home/arvinnizar/html/keuangan/application/views/masterdata/program.php</file>
             <file>file:/home/arvinnizar/html/keuangan/application/views/masterdata/kegiatan.php</file>
             <file>file:/home/arvinnizar/html/keuangan/application/config/database.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/transaksi/anggaran-kegiatan.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/transaksi/renbut.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/transaksi/dropping.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/transaksi/perwabku.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/transaksi/jurnal.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/controllers/transaksi.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/transaksi/jurnal-table.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/rekap-renbut.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/perwabku.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/perwabku-table.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/realisasi.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/rekap-realisasi-pb.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/controllers/laporan.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/rekap-rincian-realisasi.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/kasbank.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/grafik.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/models/m_transaksi.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/masterdata/group.php</file>
         </group>
     </open-files>
 </project-private>
