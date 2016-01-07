@@ -473,13 +473,13 @@
                     if (data.act === 'add') {
                         get_list_rekap_kasir(1);
                         message_add_success();
-                        reset_form();
+                        //reset_form();
                         //cetak_bukti_kas(data.id, 'bkm');
                     } else {
                         get_list_rekap_kasir(page);
                         message_edit_success();
                         //cetak_bukti_kas(data.id, 'bkk');
-                        reset_form();
+                        //reset_form();
                     }
                 }
             }
