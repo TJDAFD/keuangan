@@ -1,7 +1,12 @@
 <?php
 header_excel('realisasi-all-'.$tahun.'.xls');
-$month1 = isset($_GET['awal'])?$_GET['awal']:'1';
-$month2 = isset($_GET['akhir'])?$_GET['akhir']:date("m");
+$month1 = get_safe('awal')?get_safe('awal'):'1';
+$month2 = get_safe('akhir')?get_safe('akhir'):date("m");
+$thisyear = date("Y");
+$year   = get_safe('year');
+if ($thisyear !== $year) {
+    $month2 = 12;
+}
 $monthNames = array( 
   1 => 'Jan', 
   2 => 'Feb', 
