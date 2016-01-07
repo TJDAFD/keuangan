@@ -163,7 +163,7 @@
         {
             extraParams: { 
                 tahun: function() { 
-                    return $('#tahun').val();
+                    return date2mysql($('#awal_kasir').val()).substr(0,4);
                 }
             },
             parse: function(data){
@@ -649,6 +649,7 @@
         </div>
         <div class="modal-body">
         <form action="" id="search_kasir" role="form" class="form-horizontal">
+            
             <div class="form-group">
                 <label class="col-lg-3 control-label">Range Tanggal:</label>
                 <div class="col-lg-8">
@@ -671,13 +672,14 @@
             <div class="form-group">
                 <label class="col-lg-3 control-label">Kode MA/Proja:</label>
                 <div class="col-lg-8">
-                    <?= form_input('kode', NULL, 'id=kodema class="form-control"') ?><?= form_hidden('id_kode', NULL, 'id=id_kodema') ?>
+                    <span><?= form_input('kode', NULL, 'id=kodema class="form-control"') ?></span>
+                    <span><input type="hidden" name="id_kode" id="id_kodema" /></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-3 control-label">Keterangan MA:</label>
                 <div class="col-lg-8" id="keterangan_ma">
-                </div>
+                </div>#
             </div>
             <div class="form-group">
                 <label class="col-lg-3 control-label">Kegiatan:</label>

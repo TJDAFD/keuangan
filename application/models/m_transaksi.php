@@ -670,7 +670,7 @@ class M_transaksi extends CI_Model {
             $q.=" and pg.id_uraian = '".$search['kodema']."'";
         }
         if ($search['kegiatan'] !== '') {
-            $q.=" and u.uraian like ('%".$search['kegiatan']."%')";
+            $q.=" and pg.keterangan like ('%".$search['kegiatan']."%')";
         }
         if ($search['png_jwb'] !== '') {
             $q.=" and pg.penerima like ('%".$search['png_jwb']."%')";
@@ -689,7 +689,7 @@ class M_transaksi extends CI_Model {
             $limitation = " limit $start , $limit";
         }
         $query = $this->db->query($sql . $limitation);
-        //echo $sql . $q . $limitation;
+        //echo $sql . $limitation;
         $queryAll = $this->db->query($sql);
         $data['data'] = $query->result();
         $data['jumlah'] = $queryAll->num_rows();
