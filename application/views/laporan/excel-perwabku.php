@@ -1,5 +1,5 @@
 <?php
-header_excel('perwabku-'.$cari['awal'].'-sd-'.$cari['akhir'].'.xls');
+    header_excel('perwabku-'.$cari['awal'].'-sd-'.$cari['akhir'].'.xls');
 ?>
 <table width="100%">
     <tr><td colspan="10">REKAP PERWABKU <?= isset($satker->nama)?'SATKER '.$satker->nama:NULL ?></td></tr>
@@ -54,8 +54,8 @@ header_excel('perwabku-'.$cari['awal'].'-sd-'.$cari['akhir'].'.xls');
         <?php } ?>
         <td align="center"><?= $data->kode_pwk ?></td>
         <td align="center"><?= datefmysql($data->tanggal) ?></td>
-        <td align="right"><?= formatcurrency($data->dana_digunakan) ?></td>
-        <td align="right"><?= formatcurrency($data->dana-$data->dana_digunakan) ?></td>
+        <td align="right"><?= ($data->dana_digunakan) ?></td>
+        <td align="right"><?= ($data->dana-$data->dana_digunakan) ?></td>
     </tr>
     <?php } ?>
 </table>

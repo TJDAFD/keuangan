@@ -36,6 +36,9 @@
             <file>file:/home/arvinnizar/html/keuangan/application/models/m_transaksi.php</file>
             <file>file:/home/arvinnizar/html/keuangan/application/views/masterdata/group.php</file>
             <file>file:/home/arvinnizar/html/keuangan/application/config/database.sample.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/excel-realisasi-table.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/controllers/autocomplete.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/models/m_autocomplete.php</file>
         </group>
     </open-files>
 </project-private>
