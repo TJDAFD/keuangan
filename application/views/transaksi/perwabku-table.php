@@ -14,7 +14,7 @@
         <th width="5%"></th>
     </tr>
     <?php foreach ($list_data as $key => $data) { ?>
-    <tr class="<?= ($key%2==1)?'even':'odd' ?>">
+    <tr valign="top" class="<?= ($key%2==1)?'even':'odd' ?>">
         <td align="center"><?= $auto++ ?></td>
         <td align="center"><?= $data->kode_pwk ?></td>
         <td align="right"><?= rupiah($data->dana) ?></td>
@@ -36,6 +36,7 @@
         <td><i><?= $data->username ?></i></td>
         <td align="right" class="nowrap">
             <button type="button" class="btn btn-default btn-xs" onclick="print_perwabku('<?= $data->id ?>');" title="Klik untuk print"><i class="fa fa-print"></i></button>
+            <button type="button" class="btn btn-default btn-xs" onclick="edit_perwabku('<?= $data->id ?>');" title="Klik untuk print"><i class="fa fa-pencil"></i></button>
             <button type="button" class="btn btn-default btn-xs" onclick="delete_perwabku('<?= $data->id ?>', '<?= $page ?>');" title="Klik untuk hapus"><i class="fa fa-trash-o"></i></button>
         </td>
     </tr>

@@ -717,7 +717,7 @@ class M_transaksi extends CI_Model {
         return $this->db->query($sql);
     }
     
-    function get_data_perwabku($limit = null, $start = null, $search = null) {
+    function get_data_perwabku($limit, $start, $search) {
         $q = null;
         if ($search['id'] !== '') {
             $q.=" and pw.id = '".$search['id']."'";
@@ -755,7 +755,7 @@ class M_transaksi extends CI_Model {
         //echo "<pre>".$sql . $limitation."</pre>";
         $result = $this->db->query($sql . $limitation)->result();
         foreach ($result as $key => $val) {
-            $sql_bkk = "select k.kode as kodes
+            $sql_bkk = "select k.kode as kodes, dp.*
                 from detail_perwabku dp 
                 join kasir k on (dp.id_pengeluaran = k.id)
                 where dp.id_perwabku = '".$val->id."'";
@@ -810,7 +810,7 @@ class M_transaksi extends CI_Model {
         //echo $sql;
         $result = $this->db->query($sql . $limitation)->result();
         foreach ($result as $key => $val) {
-            $sql_bkk = "select k.kode as kodes
+            $sql_bkk = "select k.kode as kodes, dp.id_pengeluaran
                 from detail_perwabku dp 
                 join kasir k on (dp.id_pengeluaran = k.id)
                 where dp.id_perwabku = '".$val->id."'";
@@ -832,6 +832,7 @@ class M_transaksi extends CI_Model {
     
     function save_perwabku() {
         $this->db->trans_begin();
+        $id_perwabku    = post_safe('id_perwabku');
         $id_pengeluaran = post_safe('id_nomorbkk'); // array
         $tanggal        = date2mysql(post_safe('tanggal'));
         $kode_pwk       = post_safe('nomor');
@@ -841,6 +842,7 @@ class M_transaksi extends CI_Model {
         
         if (is_array($id_pengeluaran)) {
             $data = array(
+                'id' => $id_perwabku,
                 'kode' => $kode_pwk,
                 'tanggal' => $tanggal,
                 'dana_digunakan' => $dana,
@@ -848,9 +850,15 @@ class M_transaksi extends CI_Model {
                 'catatan' => $catatan,
                 'id_user' => $this->session->userdata('id_user')
             );
-            $this->db->insert('perwabku', $data);
-
-            $id_perwabku = $this->db->insert_id();
+            if ($data['id'] === '') {
+                $this->db->insert('perwabku', $data);
+                $id_perwabku = $this->db->insert_id();
+            } else {
+                $this->db->where('id', $data['id']);
+                $this->db->update('perwabku', $data);
+                $id_perwabku = $data['id'];
+                $this->db->delete('detail_perwabku', array('id_perwabku' => $id_perwabku));
+            }
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
                 $result['status'] = FALSE;

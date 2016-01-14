@@ -61,6 +61,30 @@
             }
         });
     }
+    
+    function edit_perwabku(id) {
+        $.ajax({
+            type: 'GET',
+            url: '<?= base_url('api/transaksi/perwabkus') ?>/id/'+id+'/page/1',
+            data: $('#search_perwabku').serialize(),
+            success: function(data) {
+                var data = data.data[0];
+                $('#datamodal_tambah').modal('show');
+                $('#id_perwabku').val(data.id);
+                $('#nomor').val(data.kode_pwk);
+                $('#tanggal').val(datefmysql(data.tanggal));
+                $('#dana').val(numberToCurrency(data.dana));
+                $('#kelengkapan').val(data.kelengkapan);
+                $('#catatan').val(data.catatan);
+                $('#nobkk').empty();
+                $.each(data.perwabku, function (i, v) {
+                    bkk_add_row();
+                    $('#nomorbkk'+(i+1)).val(v.kodes);
+                    $('#id_nomorbkk'+(i+1)).val(v.id_pengeluaran);
+                });
+            }
+        });
+    }
 
     function get_nominal_perwabku(id) {
         $.ajax({
@@ -325,7 +349,7 @@
             <div class="form-group">
                 <label class="col-lg-3 control-label">Tanggal Perwabku:</label>
                 <div class="col-lg-8">
-                    <div><input type="text" name="awal" id="awal_pwk" value="<?= date("01/m/Y") ?>" size="10" class="hasDatepicker form-control" /> </div>
+                    <div><input type="text" name="awal" id="awal_pwk" value="<?= date("01/12/2015") ?>" size="10" class="hasDatepicker form-control" /> </div>
                     <div><input type="text" name="akhir" id="akhir_pwk" value="<?= date("d/m/Y") ?>" class="hasDatepicker form-control" /></div>
                 </div>
             </div>
