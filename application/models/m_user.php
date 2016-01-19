@@ -35,7 +35,7 @@ class M_user extends CI_Model {
         if ($module !== NULL) {
             $q .=  "and p.module_id = '$module' ";
         }
-        $sql = "select m.*, p.form_nama, p.url, p.module_id, p.id as id_privileges 
+        $sql = "select m.*, p.form_nama, p.url, p.module_id, p.id as id_privileges, pp.extend_privileges 
             from user_group_privileges pp
             join privileges p on (pp.privileges_id = p.id)
             join user_group ug on (pp.user_group_id = ug.id)
@@ -45,6 +45,18 @@ class M_user extends CI_Model {
             order by p.urut";
         //echo $sql;
         return $this->db->query($sql);
+    }
+    
+    function get_extend_privileges($id_privileges) {
+        $sql = "select pp.extend_privileges 
+            from user_group_privileges pp
+            join privileges p on (pp.privileges_id = p.id)
+            join user_group ug on (pp.user_group_id = ug.id)
+            join users u on (ug.id = u.id_user_group)
+            join module m on (p.module_id = m.id)
+            where p.id = '".$id_privileges."' and ug.id = '".$this->session->userdata('id_group')."' and p.show_desktop = '1'";
+        
+        return $this->db->query($sql)->row();
     }
 }
 ?>

@@ -521,18 +521,17 @@ class M_masterdata extends CI_Model {
         return $ret;
     }
 
-    function user_add_data($data) {
+    function save_data_user($data) {
         if (post_safe('id_user_account') == '') {
             $this->db->insert('users', $data);
             $result['status'] = TRUE;
             $result['id'] = $this->db->insert_id();
             $result['act'] = 'add';
         } else {
-            $data['password'] = md5('1234');
-            $this->db->where('id', post_safe('id_user_account'));
+            $this->db->where('id', $data['id']);
             $this->db->update('users', $data);
             $result['status'] = TRUE;
-            $result['id'] = post_safe('id');
+            $result['id'] = $data['id'];
             $result['act'] = 'edit';
         }
         return $result;
@@ -574,12 +573,18 @@ class M_masterdata extends CI_Model {
         return $data;
     }
 
-    function privileges_get_data() {
-        $sql = "select p.*, m.nama as modul from `privileges`p 
-            join module m on(p.module_id = m.id)
+    function privileges_get_data($id) {
+        $sql = "select p.*, m.nama as modul 
+            from privileges p 
+            join module m on (p.module_id = m.id)
             order by m.nama, p.form_nama";
-        $query = $this->db->query($sql);
-        return $query->result();
+        $query = $this->db->query($sql)->result();
+        foreach ($query as $key => $value) {
+            $sql_child = "select count(id), extend_privileges from user_group_privileges where 
+             user_group_id = '".$id."' and privileges_id = '".$value->id."'";
+            $query[$key]->extend_privileges = $this->db->query($sql_child)->row()->extend_privileges;
+        }
+        return $query;
     }
 
     function privileges_edit_data($data) {
@@ -588,21 +593,34 @@ class M_masterdata extends CI_Model {
         $this->db->delete('user_group_privileges');
 
         if (is_array($data['privileges'])) {
+            $detail_hidden = post_safe('detail_hidden');
             foreach ($data['privileges'] as $value) {
+                $aksi = array();
+                $extend = '';
+                if (isset($detail_hidden[$value])) {
+                    foreach ($detail_hidden[$value] as $value2) {
+                        $aksi[] = $value2;
+                    }
+                    $extend = implode('-', $aksi);
+                }
+                
                 $insert = array(
                     'user_group_id' => $data['id_group'],
-                    'privileges_id' => $value
+                    'privileges_id' => $value,
+                    'extend_privileges' => $extend
                 );
+                
                 $this->db->insert('user_group_privileges', $insert);
             }
         }
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
-            $status = FALSE;
+            $result['status'] = FALSE;
         } else {
             $this->db->trans_commit();
-            $status = TRUE;
+            $result['status'] = TRUE;
         }
+        return $result;
     }
     
     /*AKUN*/

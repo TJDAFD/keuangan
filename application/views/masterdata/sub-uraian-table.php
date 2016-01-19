@@ -1,3 +1,9 @@
+<?php 
+    $session =  $this->session->userdata('access'); 
+    if (!empty($session)) {
+        $access = explode('-', $session);
+    }
+?>
 <table cellspacing="0" width="100%" class="list-data">
     <tr>
         <th width="3%">No.</th>
@@ -24,8 +30,12 @@
         <td><?= ucwords(strtolower($data->keterangan)) ?></td>
         <td align="right"><?= ($data->sub_total !== '0')?rupiah($data->sub_total):NULL ?></td>
         <td class="aksi" align="center">
+            <?php if (isset($access[1]) and $access[1] === '1') { ?>
             <button type="button" class="btn btn-default btn-xs" onclick="edit_sub_uraian('<?= $str ?>');" title="Klik untuk edit"><i class="fa fa-pencil"></i></button>
+            <?php } ?>
+            <?php if (isset($access[2]) and $access[2] === '1') { ?>
             <button type="button" class="btn btn-default btn-xs" onclick="delete_sub_uraian('<?= $data->id ?>', '<?= $page ?>');" title="Klik untuk hapus"><i class="fa fa-trash-o"></i></button>
+            <?php } ?>
         </td>
     </tr>
     <?php 

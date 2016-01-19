@@ -21,7 +21,7 @@ class User extends CI_Controller {
     public function menu_user_load_data() {
         $id_group = $this->session->userdata('id_group');
         $active = $this->session->userdata('active_modul');
-        if($active != NULL){
+        if($active !== NULL){
             $data['detail_menu'] = $this->m_user->menu_user_load_data($id_group, $active)->result();
         }
         

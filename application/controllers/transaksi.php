@@ -5,6 +5,7 @@ class Transaksi extends CI_Controller {
     function __construct() {
         parent::__construct();
         $id_user = $this->session->userdata('id_user');
+        $this->load->model(array('m_user'));
         if (empty($id_user)) {
             die(json_encode(array('error' => 'Anda belum login')));
         }
@@ -299,9 +300,13 @@ class Transaksi extends CI_Controller {
     }
     
     /*PAGU ANGGARAN*/
-    function pagu() {
+    function pagu($id_privileges) {
         $data['title'] = 'Entri Data Pagu Kegiatan';
         $data['satker']= $this->m_masterdata->load_satker()->result();
+        $access = $this->m_user->get_extend_privileges($id_privileges);
+        if (isset($access->extend_privileges)) {
+            $this->session->set_userdata(array('access' => $access->extend_privileges));
+        }
         $this->load->view('transaksi/pagu', $data);
     }
     
@@ -625,9 +630,13 @@ class Transaksi extends CI_Controller {
         die(json_encode($data));
     }
     
-    function anggaran_kegiatan() {
+    function anggaran_kegiatan($id_privileges) {
         $data['title'] = 'Anggaran Kegiatan';
         $data['satker']= $this->m_masterdata->load_satker()->result();
+        $access = $this->m_user->get_extend_privileges($id_privileges);
+        if (isset($access->extend_privileges)) {
+            $this->session->set_userdata(array('access' => $access->extend_privileges));
+        }
         $this->load->view('transaksi/anggaran-kegiatan', $data);
     }
     

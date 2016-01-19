@@ -140,8 +140,15 @@ function delete_pagu(id, page) {
     <li class="active">Data Pagu Kegiatan</li>
 </ol>
 <div class="kegiatan">
-    
+    <?php 
+        $session =  $this->session->userdata('access'); 
+        if (!empty($session)) {
+            $access = explode('-', $session);
+        }
+    ?>
+    <?php if (isset($access[0]) and $access[0] === '1') { ?>
     <button id="add_pagu" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah</button>
+    <?php } ?>
     <button id="reload_pagu" class="btn"><i class="fa fa-refresh"></i> Reload Data</button>
     <div class="searching-box">
         <select name="tahun" id="tahun" class="form-control"><option value="">Pilih  tahun ...</option><?php for($i = 2013; $i <= date("Y")+1; $i++) { ?><option value="<?= $i ?>"><?= $i ?></option><?php } ?></select>

@@ -208,8 +208,15 @@
     <li class="active">Anggaran Kegiatan</li>
 </ol>
 <div class="kegiatan">
-    
-    <button class="btn btn-primary" id="add_sub_uraian"><i class="fa fa-plus-circle"></i> Tambah</button>
+    <?php 
+        $session =  $this->session->userdata('access'); 
+        if (!empty($session)) {
+            $access = explode('-', $session);
+        }
+    ?>
+    <?php if (isset($access[0]) and $access[0] === '1') { ?>
+    <button class="btn btn-primary" id="add_sub_uraian"><i class="fa fa-plus-circle"></i> Tambah Data</button>
+    <?php } ?>
     <button class="btn" id="cari_button"><i class="fa fa-search"></i> Cari</button>
     <button class="btn" id="reload_sub_uraian"><i class="fa fa-refresh"></i> Reload Data</button>
     <div id="result-sub_uraian"></div>

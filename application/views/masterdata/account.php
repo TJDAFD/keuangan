@@ -2,62 +2,42 @@
     $(function() {
         get_user_list(1);
         $('#add-user-account').click(function() {
-            form_user_account();
+            $('#datamodal_user_account').modal('show');
+            $('#datamodal_user_account #modal_title').html('Tambah Pengguna Sistem');
+            reset_form();
         });
         
         $('#reset-user-account').click(function() {
             get_user_list(1);
         });
-    });
-
-    function form_user_account() {
-        var str = '<div id=form-user><form id="save-user-account">'+
-                    '<?= form_hidden('id_user_account', NULL, 'id=id_user_account') ?>'+
-                    '<table width=100% class=inputan cellspacing=0>'+
-                    '<tr><td width=20%>Nama:</td><td><?= form_input('nama', NULL, 'id=nama size=40') ?></td></tr>'+
-                    '<tr><td>Username:</td><td><?= form_input('username', NULL, 'id=username size=40') ?></td></tr>'+
-                    '<tr><td>User Group:</td><td><select name="group" id="group-user"><option value="">Pilih ...</option><?php foreach ($user_group as $data) { ?><option value="<?= $data->id ?>"><?= $data->nama ?></option><?php } ?></select></td></tr>'+
-                    '</table>'+
-                '</form></div>';
-        $(str).dialog({
-            title: 'Tambah User Group',
-            autoOpen: true,
-            modal: true,
-            width: 400,
-            height: 200,
-            buttons: {
-                "Simpan": function() {
-                    $('#save-user-account').submit();
-                    $(this).dialog().remove();
-                },
-                "Cancel": function() {
-                    $(this).dialog().remove();
-                }
-            },
-            close: function() {
-                $(this).dialog().remove();  
+        
+        $('.form-control').change(function() {
+            if ($(this).val() !== '') {
+                dc_validation_remove(this);
             }
         });
-        $('#save-user-account').submit(function() {
-            $.ajax({
-                url: '<?= base_url('masterdata/manage_user/save') ?>',
-                data: $(this).serialize(),
-                type: 'POST',
-                dataType: 'json',
-                success: function(data) {
-                    if (data.status === true) {
-                        if (data.act === 'add') {
-                            alert_tambah();
-                            $('#form-user').dialog().remove();
-                            get_user_list(1);
-                        } else {
-                            alert_edit();
-                            get_user_list(1);
-                        }
+    });
+    
+    function save_data_user_account() {
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url('api/masterdata/user_account') ?>',
+            data: $('#save_user_account').serialize(),
+            dataType: 'json',
+            success: function(data) {
+                var page = $('.noblock').html();
+                if (data.status === true) {
+                    if (data.act === 'add') {
+                        message_add_success();
+                        get_user_list(1, data.id);
+                        reset_form();
+                    } else {
+                        $('#datamodal_user_account').modal('hide');
+                        message_edit_success();
+                        get_user_list(page);
                     }
                 }
-            });
-            return false;
+            }
         });
     }
     
@@ -75,69 +55,148 @@
 
     function edit_user(str){
         var arr = str.split('#');
-        form_user_account();
+        $('#datamodal_user_account').modal('show');
+        $('#datamodal_user_account #modal_title').html('Edit Pengguna Sistem');
         $('#nama').val(arr[2]);
         $('#username').val(arr[1]);
         $('#group-user').val(arr[3]);
         $('#id_user_account').val(arr[0]);
     }
+    
+    function confirm_save_user_account() {
+        if ($('#nama').val() === '') {
+            dc_validation('#nama','Nama user tidak boleh kosong !'); return false;
+        }
+        if ($('#username').val() === '') {
+            dc_validation('#username','Username tidak boleh kosong !'); return false;
+        }
+        if ($('#group-user').val() === '') {
+            dc_validation('#group-user','Group user harus dipilih !'); return false;
+        }
+        bootbox.dialog({
+          message: "Anda yakin akan menyimpan data ini?",
+          title: "Konfirmasi Simpan",
+          buttons: {
+            batal: {
+              label: '<i class="fa fa-refresh"></i> Batal',
+              className: "btn-default",
+              callback: function() {
+                
+              }
+            },
+            ya: {
+              label: '<i class="fa fa-check-square-o"></i>  Ya',
+              className: "btn-primary",
+              callback: function() {
+                save_data_user_account();
+              }
+            }
+          }
+        });
+    }
 
-    function delete_user(id){
-            $('<div></div>')
-              .html("Anda yakin akan menghapus data ini ?")
-              .dialog({
-                 title : "Hapus Data",
-                 modal: true,
-                 buttons: [ 
-                    { 
-                        text: "Ok", 
-                        click: function() { 
-                            $.ajax({
-                                type : 'GET',
-                                url: '<?= base_url('masterdata/manage_user') ?>/delete/'+$('.noblock').html(),
-                                data :'id='+id,
-                                cache: false,
-                                success: function(data) {
-                                    get_user_list($('.noblock').html());
-                                    alert_delete();
-                                }
-                            });
-                            $( this ).dialog( "close" ); 
-                        } 
-                    }, 
-                    { text: "Batal", click: function() { $( this ).dialog( "close" );}} 
-                ]
-            });     
-
+    function delete_user(id){  
+        bootbox.dialog({
+          message: "Anda yakin akan menghapus data ini?",
+          title: "Hapus Data",
+          buttons: {
+            batal: {
+              label: '<i class="fa fa-refresh"></i> Batal',
+              className: "btn-default",
+              callback: function() {
+                
+              }
+            },
+            hapus: {
+              label: '<i class="fa fa-trash-o"></i>  Ya',
+              className: "btn-primary",
+              callback: function() {
+                $.ajax({
+                    type : 'DELETE',
+                    url: '<?= base_url('api/masterdata/user_account') ?>/id/'+id,
+                    cache: false,
+                    success: function(data) {
+                        var page = $('.noblock').html();
+                        get_user_list(page);
+                        message_delete_success();
+                    }
+                });
+              }
+            }
+          }
+        });
     }
 
     function resetpassword(id, str) {
-        $('<div>Anda yakin akan mereset password untuk username <b>'+str+'</b> ?</div>').dialog({
-            autoOpen: true,
-            title : "Konfirmasi",
-            modal: true,
-            buttons: { 
-                "Ok": function() { 
-                    $.ajax({
-                        type : 'GET',
-                        url: '<?= base_url('masterdata/manage_user') ?>/reset_password/'+$('.noblock').html(),
-                        data :'id='+id,
-                        success: function(data) {
-                            get_user_list($('.noblock').html());
-                            custom_message('Informasi','Reset password <b>'+str+'</b> sukses dilakukan');
-                        }
-                    });
-                    $(this).dialog().remove(); 
-                }, 
-                "Batal": function() { 
-                    $(this).dialog().remove(); 
-                }
+        bootbox.dialog({
+          message: "Anda yakin akan mereset password menjadi 1234?",
+          title: "Konfirmasi Reset Password",
+          buttons: {
+            batal: {
+              label: '<i class="fa fa-refresh"></i> Batal',
+              className: "btn-default",
+              callback: function() {
+                
+              }
+            },
+            hapus: {
+              label: '<i class="fa fa-unlock"></i>  Ya',
+              className: "btn-primary",
+              callback: function() {
+                $.ajax({
+                    type : 'GET',
+                    url: '<?= base_url('masterdata/manage_user') ?>/reset_password/'+$('.noblock').html(),
+                    data :'id='+id,
+                    success: function(data) {
+                        get_user_list($('.noblock').html());
+                        message_edit_success();
+                    }
+                });
+              }
             }
-      });  
+          }
+        });
     }
 
 
 </script>
-<button id="add-user-account" class="btn btn-primary">Tambah User</button>
-<button id="reset-user-account" class="btn">Reset</button>
+<button id="add-user-account" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah User</button>
+<button id="reset-user-account" class="btn"><i class="fa fa-refresh"></i> Reload Data</button>
 <div id="user_list"></div>
+<div id="datamodal_user_account" class="modal fade">
+    <div class="modal-dialog" style="width: 600px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="modal_title"></h4>
+        </div>
+        <div class="modal-body">
+        <form id="save_user_account" class="form-horizontal" role="form">
+            <input type="hidden" name="id_user_account" id="id_user_account" />
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Nama:</label>
+                <div class="col-lg-8">
+                    <?= form_input('nama', NULL, 'id=nama class="form-control"') ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Username:</label>
+                <div class="col-lg-8">
+                    <?= form_input('username', NULL, 'id=username class="form-control"') ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">User Group</label>
+                <div class="col-lg-8">
+                    <select name="group" id="group-user" class="form-control"><option value="">Pilih ...</option><?php foreach ($user_group as $data) { ?><option value="<?= $data->id ?>"><?= $data->nama ?></option><?php } ?></select>
+                </div>
+            </div>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
+          <button type="button" class="btn btn-primary" id="save" onclick="confirm_save_user_account();"><i class="fa fa-save"></i> Simpan</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

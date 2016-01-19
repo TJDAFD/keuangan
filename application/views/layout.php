@@ -185,7 +185,7 @@
                           <ul>
                                 <?php $detail = $this->m_user->menu_user_load_data($this->session->userdata('id_user'), $menu->id)->result(); 
                                 foreach ($detail as $rows) { ?>
-                                <li><a class="submenu" onclick="load_menu('<?= base_url($rows->url) ?>'); return false;" href='<?= base_url($rows->url) ?>'><span><?= $rows->form_nama ?></span></a></li>
+                                <li><a class="submenu" onclick="load_menu('<?= base_url($rows->url.'/'.$rows->id_privileges) ?>'); return false;" href='<?= base_url($rows->url) ?>'><span><?= $rows->form_nama ?></span></a></li>
                                 <?php } ?>
                           </ul>
                        </li>

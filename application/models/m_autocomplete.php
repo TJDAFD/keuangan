@@ -357,11 +357,12 @@ class M_autocomplete extends CI_Model {
     }
     
     function nomorbkk($q) {
-        $sql = "select p.*, u.uraian as keterangan, CONCAT_WS(' ',p.kode,'Rp. ',p.pengeluaran,'<br/>',u.uraian) as kode, p.pengeluaran as cashbon, u.kode as kode_ma, r.id_renbut
+        $sql = "select p.*, u.uraian as keterangan, CONCAT_WS(' ',p.kode,'Rp. ',p.pengeluaran,'<br/>',u.uraian) as kode, 
+            p.pengeluaran as cashbon, u.kode as kode_ma, r.id_renbut
             from kasir p
             left join rencana_kebutuhan r on (p.kode = r.kode_cashbon)
             left join uraian u on (p.id_uraian = u.id)
-            where p.id_renbut is NULL and p.kode like ('".$q."%')";
+            where p.id_renbut is NULL and p.kode like ('".$q."%') group by p.kode";
         //echo $sql;
         return $this->db->query($sql);
     }
@@ -371,7 +372,8 @@ class M_autocomplete extends CI_Model {
             from kasir p
             left join rencana_kebutuhan r on (p.kode = r.kode_cashbon)
             left join uraian u on (p.id_uraian = u.id)
-            where p.perwabku = 'Belum' and p.id not in (select id_pengeluaran from detail_perwabku) and p.kode like ('".$q."%') group by p.kode";
+            where p.perwabku = 'Belum' and p.id not in 
+            (select id_pengeluaran from detail_perwabku) and p.kode like ('".$q."%') group by p.kode";
         //echo $sql;
         return $this->db->query($sql);
     }

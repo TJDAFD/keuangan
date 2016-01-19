@@ -24,35 +24,73 @@
                 $('input[type=checkbox]').attr('checked','checked');
             });
             
+            $('.form-control').change(function() {
+                if ($(this).val() !== '') {
+                    dc_validation_remove(this);
+                }
+            });
+            
             $('#uncek').click(function(){
                 $('input[type=checkbox]').removeAttr('checked');
             });
+            
+            $('input[type=checkbox]').live("change",function(){
+                var target = $(this).next('input[type=hidden]').val();
+                var targ = 0;
+                if(target === '0') {
+                    targ = 1;
+                }
+                $(this).next('input[type=hidden]').val(targ);
+            });
         });
+        
+        function confirm_save_group() {
+            if ($('#nama_group').val() === '') {
+                dc_validation('#nama_group','Nama group tidak boleh kosong !'); return false;
+            }
+            bootbox.dialog({
+                message: "Anda yakin akan menyimpan data ini?",
+                title: "Konfirmasi Simpan",
+                buttons: {
+                  batal: {
+                    label: '<i class="fa fa-refresh"></i> Batal',
+                    className: "btn-default",
+                    callback: function() {
+
+                    }
+                  },
+                  ya: {
+                    label: '<i class="fa fa-check-square-o"></i>  Ya',
+                    className: "btn-primary",
+                    callback: function() {
+                      save_data();
+                    }
+                  }
+                }
+            });
+        }
         
         function save_data() {
             var Url = '<?= base_url("masterdata/manage_group") ?>/post/';
             var id = $('input[name=id]').val();
-            if ($('#nama_group').val()===''){
-                custom_message('Peringatan','Nama tidak boleh kosong !','#nama_group');
-            } else {
-                $.ajax({
-                    type : 'POST',
-                    url: Url+$('.noblock').html(),               
-                    data: $('#form_group').serialize(),
-                    cache: false,
-                    success: function(data) {
-                        $('#group_list').html(data);
-                        if (id === '') {
-                            alert_tambah();
-                            $('#nama_group').val('');
-                        } else {
-                            alert_edit();
-                        }
+            $.ajax({
+                type : 'POST',
+                url: Url+$('.noblock').html(),               
+                data: $('#form_group').serialize(),
+                cache: false,
+                success: function(data) {
+                    var page = $('.noblock').html();
+                    if (id === '') {
+                        message_add_success();
+                        reset_form();
+                        get_group_list(1, data);
+                    } else {
+                        message_edit_success();
+                        get_group_list(page);
+                        $('#datamodal').modal('hide');
                     }
-                });
-
-                return false;
-            }
+                }
+            });
         }
         
         function edit_privileges(id, nama) {
@@ -61,6 +99,23 @@
             get_privileges_list(id);
             $('#nama_group_priv').html(nama);
             $('input[name=id_group]').val(id);
+        }
+        
+        function save_data_privileges() {
+            $.ajax({
+                type : 'POST',
+                url: '<?= base_url('api/masterdata/grant_privileges') ?>',
+                data: $('#form_priv').serialize(),
+                cache: false,
+                success: function(data) {
+                    if (data.status === true) {
+                        message_edit_success();
+                    }
+                },
+                error: function() {
+                    message_edit_failed();
+                }
+            });
         }
         
         function reset_form() {
@@ -102,34 +157,38 @@
             $('#nama_group').val(nama);
         }
     
-        function delete_group(id){
-                $('<div></div>')
-                  .html("Anda yakin akan menghapus data ini ?")
-                  .dialog({
-                     title : "Hapus Data",
-                     modal: true,
-                     buttons: [ 
-                        { 
-                            text: "Ok", 
-                            click: function() { 
-                                $.ajax({
-                                    type : 'GET',
-                                    url: '<?= base_url("masterdata/manage_group") ?>/delete/'+$('.noblock').html(),
-                                    data :'id='+id,
-                                    cache: false,
-                                    success: function(data) {
-                                        $('#group_list').html(data);
-                                        alert_delete();
-                                    }
-                                });
-                                $( this ).dialog( "close" ); 
-                            } 
-                        }, 
-                        { text: "Batal", click: function() { $( this ).dialog( "close" );}} 
-                    ]
-                });     
-            
-        }
+    function delete_group(id){
+        bootbox.dialog({
+          message: "Anda yakin akan menghapus data ini?",
+          title: "Hapus Data",
+          buttons: {
+            batal: {
+              label: '<i class="fa fa-refresh"></i> Batal',
+              className: "btn-default",
+              callback: function() {
+                
+              }
+            },
+            hapus: {
+              label: '<i class="fa fa-trash-o"></i>  Ya',
+              className: "btn-primary",
+              callback: function() {
+                $.ajax({
+                    type : 'GET',
+                    url: '<?= base_url("masterdata/manage_group") ?>/delete/'+$('.noblock').html(),
+                    data :'id='+id,
+                    cache: false,
+                    success: function(data) {
+                        var page = $('.noblock').html();
+                        get_group_list(page);
+                        message_delete_success();
+                    }
+                });
+              }
+            }
+          }
+        });
+    }
         
         
         
@@ -159,14 +218,14 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
-          <button type="button" class="btn btn-primary" id="save" onclick="save_data();"><i class="fa fa-save"></i> Simpan</button>
+          <button type="button" class="btn btn-primary" id="save" onclick="confirm_save_group();"><i class="fa fa-save"></i> Simpan</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     
     <div id="datamodal-privileges" class="modal fade">
-    <div class="modal-dialog" style="width: 600px;">
+    <div class="modal-dialog" style="width: 90%;">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -186,7 +245,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
-          <button type="button" class="btn btn-primary" id="save" onclick="save_data();"><i class="fa fa-save"></i> Simpan</button>
+          <button type="button" class="btn btn-primary" id="save" onclick="save_data_privileges();"><i class="fa fa-save"></i> Simpan</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

@@ -118,7 +118,15 @@
     <li class="active">Data Unit</li>
 </ol>
 <div class="kegiatan">
+    <?php 
+        $session =  $this->session->userdata('access'); 
+        if (!empty($session)) {
+            $access = explode('-', $session);
+        }
+    ?>
+    <?php if (isset($access[0]) and $access[0] === '1') { ?>
     <button class="btn btn-primary" id="add_unit"><i class="fa fa-plus-circle"></i> Tambah Data</button>
+    <?php } ?>
     <button class="btn btn-default" id="reload_unit"><i class="fa fa-refresh"></i> Reload Data</button>
     <div id="result"></div>
 </div>

@@ -4,14 +4,19 @@ class Masterdata extends CI_Controller {
     
     function __construct() {
         parent::__construct();
+        $this->load->model(array('m_user'));
         $id_user = $this->session->userdata('id_user');
         if (empty($id_user)) {
             die(json_encode(array('error' => 'Anda belum login')));
         }
     }
     
-    function unit() {
+    function unit($id_privileges) {
         $data['title'] = 'Unit Satuan Kerja';
+        $access = $this->m_user->get_extend_privileges($id_privileges);
+        if (isset($access->extend_privileges)) {
+            $this->session->set_userdata(array('access' => $access->extend_privileges));
+        }
         $this->load->view('masterdata/unit', $data);
     }
     
@@ -52,8 +57,13 @@ class Masterdata extends CI_Controller {
         return $data;
     }
     
-    function kegiatan() {
+    function kegiatan($id_privileges) {
         $data['title'] = 'Kegiatan';
+        $access = $this->m_user->get_extend_privileges($id_privileges);
+        $data['access'] = '';
+        if (isset($access->extend_privileges)) {
+            $data['access'] = explode('-', $access->extend_privileges);
+        }
         $this->load->view('masterdata/kegiatan', $data);
     }
     
@@ -387,7 +397,7 @@ class Masterdata extends CI_Controller {
         $limit = 15;
         $add = array(
             'id' => post_safe('id'),
-            'nama' => post_safe('nama')
+            'nama' => post_safe('nama_group')
         );
         $search = array();
         switch ($mode) {
@@ -498,7 +508,7 @@ class Masterdata extends CI_Controller {
 
     function get_group_privileges($id) {
         $data['user_priv'] = $this->m_masterdata->group_privileges_data($id);
-        $data['privilege'] = $this->m_masterdata->privileges_get_data();
+        $data['privilege'] = $this->m_masterdata->privileges_get_data($id);
         return $data;
     }
 
