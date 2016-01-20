@@ -1,3 +1,9 @@
+<?php 
+    $session =  $this->session->userdata('access'); 
+    if (!empty($session)) {
+        $access = explode('-', $session);
+    }
+?>
 <table cellspacing="0" width="100%" class="list-data">
     <tr>
         <th width="3%" rowspan="2">No.</th>
@@ -42,8 +48,12 @@
         <td><?= $data->penerima ?></td>
         <td align="center"><?= $alert ?></td>
         <td class="aksi" align="center">
+            <?php if (isset($access[1]) and $access[1] === '1') { ?>
             <button type="button" <?= $button ?> class="btn btn-default btn-xs" onclick="edit_dropping('<?= $data->id_renbut ?>','<?= $data->jml_renbut ?>');" title="Klik untuk persetujuan"><i class="fa fa-gear"></i></button>
+            <?php } ?>
+            <?php if (isset($access[2]) and $access[2] === '1') { ?>
             <button type="button" class="btn btn-default btn-xs" onclick="delete_dropping('<?= $data->id_renbut ?>', '<?= $page ?>');" title="Klik untuk hapus"><i class="fa fa-trash-o"></i></button>
+            <?php } ?>
         </td>
     </tr>
     <?php } ?>

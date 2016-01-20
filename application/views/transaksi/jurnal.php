@@ -408,6 +408,7 @@
     }
 
     function get_list_jurnal(page) {
+        $('#datamodal_search_jurnal').modal('hide');
         $.ajax({
             url: '<?= base_url('transaksi/manage_jurnal') ?>/list/'+page,
             cache: false,
@@ -606,7 +607,12 @@
         <li class="active">Data Penerbang</li>
     </ol>
     <div class="kegiatan">
-        
+    <?php 
+        $session =  $this->session->userdata('access'); 
+        if (!empty($session)) {
+            $access = explode('-', $session);
+        }
+    ?>
         <ul id="tabs" class="nav nav-tabs">
             <li class="link_tab" id="tabs1"><a data-toggle="tab" href="#tabs-1">Verifikasi Data</a></li>
             <li class="link_tab" id="tabs2"><a data-toggle="tab" href="#tabs-2">Jurnal Transaksi</a></li>
@@ -621,7 +627,9 @@
             </div>
             <div class="tab-pane" id="tabs-2">
                 <div style="margin-top: 5px;">
+                    <?php if (isset($access[2]) and $access[2] === '1') { ?>
                     <button class="btn btn-primary" id="add_jurnal"><i class="fa fa-plus-circle"></i> Tambah Data</button>
+                    <?php } ?>
                     <button class="btn" id="cari_jurnal"><i class="fa fa-search"></i> Cari</button>
                     <button class="btn" id="reload"><i class="fa fa-refresh"></i> Reload Data</button>
                     <div id="result"></div>

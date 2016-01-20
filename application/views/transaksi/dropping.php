@@ -155,9 +155,17 @@ $(function() {
     <li class="active">Dropping</li>
 </ol>
 <div class="kegiatan">
+    <?php 
+        $session =  $this->session->userdata('access'); 
+        if (!empty($session)) {
+            $access = explode('-', $session);
+        }
+    ?>
     
     <button class="btn" id="cari_button"><i class="fa fa-search"></i> Cari</button>
+    <?php if (isset($access[0]) and $access[0] === '1') { ?>
     <button class="btn" id="excel_dropping"><i class="fa fa-file-text-o"></i> Export Excel</button>
+    <?php } ?>
     <button class="btn" id="reload_dropping"><i class="fa fa-refresh"></i> Reload Data</button>
     <div id="result">
 

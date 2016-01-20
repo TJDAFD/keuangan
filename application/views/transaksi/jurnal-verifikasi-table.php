@@ -1,3 +1,9 @@
+<?php 
+    $session =  $this->session->userdata('access'); 
+    if (!empty($session)) {
+        $access = explode('-', $session);
+    }
+?>
 <table cellspacing="0" width="100%" class="list-data">
     <tr>
         <th width="3%">No.</th>
@@ -41,8 +47,12 @@
         <td align="right"><?= rupiah($data->nominal) ?></td>
         <td style="white-space: nowrap;"><?= $status ?></td>
         <td align="right">
+            <?php if (isset($access[0]) and $access[0] === '1') { ?>
             <button type="button" class="btn btn-default btn-xs" <?= $tombol ?> onclick="edit_kasir('<?= $data->id ?>','<?= $data->kode_trans ?>');" title="Klik untuk edit"><i class="fa fa-pencil"></i></button>
+            <?php } ?>
+            <?php if (isset($access[1]) and $access[1] === '1') { ?>
             <button type="button" class="btn btn-default btn-xs" <?= $tombol ?> onclick="verifikasi('<?= $data->id ?>','<?= $page ?>');" title="Klik untuk verifikasi kode Akun"><i class="fa fa-pencil-square-o"></i></button>
+            <?php } ?>
         </td>
     </tr>
     <?php } ?>

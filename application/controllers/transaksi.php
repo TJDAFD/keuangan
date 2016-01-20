@@ -11,7 +11,7 @@ class Transaksi extends CI_Controller {
         }
     }
     
-    function renbut() {
+    function renbut($id_privileges) {
         $data['title'] = 'Rencana Kebutuhan';
         $data['satker']= $this->m_masterdata->load_satker()->result();
         $data['bulan'] = array(
@@ -29,6 +29,10 @@ class Transaksi extends CI_Controller {
             array('11', 'November'),
             array('12', 'Desember')
         );
+        $access = $this->m_user->get_extend_privileges($id_privileges);
+        if (isset($access->extend_privileges)) {
+            $this->session->set_userdata(array('access' => $access->extend_privileges));
+        }
         $this->load->view('transaksi/renbut', $data);
     }
     
@@ -83,7 +87,7 @@ class Transaksi extends CI_Controller {
     }
     
     /**DROPPING*/
-    function dropping() {
+    function dropping($id_privileges) {
         $data['title'] = 'Dropping';
         $data['satker']= $this->m_masterdata->load_satker()->result();
         $data['bulan'] = array(
@@ -101,6 +105,10 @@ class Transaksi extends CI_Controller {
             array('11', 'November'),
             array('12', 'Desember')
         );
+        $access = $this->m_user->get_extend_privileges($id_privileges);
+        if (isset($access->extend_privileges)) {
+            $this->session->set_userdata(array('access' => $access->extend_privileges));
+        }
         $this->load->view('transaksi/dropping', $data);
     }
     
@@ -397,8 +405,12 @@ class Transaksi extends CI_Controller {
         return $data;
     }
     
-    function kasir() {
+    function kasir($id_privileges) {
         $data['title'] = 'Form Kasir (Penerimaan / Pengeluaran / Mutasi)';
+        $access = $this->m_user->get_extend_privileges($id_privileges);
+        if (isset($access->extend_privileges)) {
+            $this->session->set_userdata(array('access' => $access->extend_privileges));
+        }
         $this->load->view('transaksi/kasir', $data);
     }
     
@@ -423,8 +435,12 @@ class Transaksi extends CI_Controller {
         die(json_encode($data));
     }
     
-    function jurnal() {
+    function jurnal($id_privileges) {
         $data['title'] = 'Jurnal Transaksi';
+        $access = $this->m_user->get_extend_privileges($id_privileges);
+        if (isset($access->extend_privileges)) {
+            $this->session->set_userdata(array('access' => $access->extend_privileges));
+        }
         $this->load->view('transaksi/jurnal', $data);
     }
     
@@ -552,7 +568,7 @@ class Transaksi extends CI_Controller {
     }
     
     /*PERWABKU*/
-    function perwabku() {
+    function perwabku($id_privileges) {
         $data['title'] = 'Perwabku';
         $data['satker']= $this->m_masterdata->load_satker()->result();
         $data['bulan'] = array(
@@ -570,6 +586,10 @@ class Transaksi extends CI_Controller {
             array('11', 'November'),
             array('12', 'Desember')
         );
+        $access = $this->m_user->get_extend_privileges($id_privileges);
+        if (isset($access->extend_privileges)) {
+            $this->session->set_userdata(array('access' => $access->extend_privileges));
+        }
         $this->load->view('transaksi/perwabku', $data);
     }
     
