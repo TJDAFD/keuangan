@@ -244,7 +244,7 @@ class M_autocomplete extends CI_Model {
     function get_last_code_kasir($trans, $tanggal) {
         $bulan = substr($tanggal, 0, 7);
         if ($trans === 'bkm') {
-            $sql = "select IFNULL(SUBSTR(kode,8,4),0) as kode from kasir where jenis = 'BKM' and tanggal like '".$bulan."%' order by kode desc limit 1";
+            $sql = "select IFNULL(SUBSTR(kode,8,4),0) as kode, CONVERT(SUBSTR(kode,4,8),UNSIGNED INTEGER) AS num from kasir where jenis = 'BKM' and tanggal like '".$bulan."%' order by num desc limit 1";
             $data= $this->db->query($sql)->row();
             if (isset($data->kode)) {
                 $auto = $data->kode;
@@ -256,7 +256,7 @@ class M_autocomplete extends CI_Model {
             $result['no'] = 'BKM'.$thn.$bln.pad($auto+1, 4);
         }
         if ($trans === 'bkk') {
-            $sql = "select IFNULL(SUBSTR(kode,8,4),0) as kode from kasir where jenis = 'BKK' and tanggal like '".$bulan."%' order by kode desc limit 1";
+            $sql = "select IFNULL(SUBSTR(kode,8,4),0) as kode, CONVERT(SUBSTR(kode,4,8),UNSIGNED INTEGER) AS num from kasir where jenis = 'BKK' and tanggal like '".$bulan."%' order by num desc limit 1";
             $data= $this->db->query($sql)->row();
             if (isset($data->kode)) {
                 $auto = $data->kode;
@@ -268,7 +268,7 @@ class M_autocomplete extends CI_Model {
             $result['no'] = 'BKK'.$thn.$bln.pad($auto+1, 4);
         }
         if ($trans === 'mts') {
-            $sql = "select IFNULL(SUBSTR(kode,8,4),0) as kode from kasir where jenis = 'MTS' and tanggal like '".$bulan."%' order by kode desc limit 1";
+            $sql = "select IFNULL(SUBSTR(kode,8,4),0) as kode, CONVERT(SUBSTR(kode,4,8),UNSIGNED INTEGER) AS num from kasir where jenis = 'MTS' and tanggal like '".$bulan."%' order by num desc limit 1";
             $data= $this->db->query($sql)->row();
             if (isset($data->kode)) {
                 $auto = $data->kode;

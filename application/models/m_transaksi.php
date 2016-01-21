@@ -678,12 +678,13 @@ class M_transaksi extends CI_Model {
         $sql = "select pg.id, pg.kode, pg.sumberdana, pg.tanggal, pg.id_rekening, pg.id_renbut, pg.posted,
                 pg.id_uraian, pg.pengeluaran as nominal, pg.penerima as penanggung_jwb, pg.perwabku, substr(pg.kode,1,3) as kode_trans, 
                 u.uraian as keterangan, IFNULL(pg.id_renbut,'') as renbut, pg.keterangan as keterangan_kasir, pg.id_rekening_pwk, pg.jenis,
-                s.nama as rekening, ss.nama as rekening_pwk
+                s.nama as rekening, ss.nama as rekening_pwk,
+                CONVERT(SUBSTR(pg.kode,4,8),UNSIGNED INTEGER) AS num
                 from kasir pg
                 left join uraian u on (pg.id_uraian = u.id)
                 left join rekening s on (pg.id_rekening = s.id)
                 left join rekening ss on (pg.id_rekening_pwk = ss.id)
-                where pg.id is not NULL $q order by pg.id desc";
+                where pg.id is not NULL $q order by num desc";
         $limitation = null;
         if ($limit !== NULL) {
             $limitation = " limit $start , $limit";
