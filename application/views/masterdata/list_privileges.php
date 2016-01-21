@@ -36,10 +36,10 @@
                             $value = '1';
                         }
                         ?>
-                        <div class="checkbox" style="float: left; margin-right: 10px; width: 70px;">
+                        <div class="checkbox" style="float: left; margin-right: 10px; width: 70px; white-space: nowrap;">
                             <label>
                                 <input type="checkbox" name="detail[<?= $key ?>][]" value="<?= $rows->id ?>" <?= $checked ?> />  <?= ucfirst($access[$i]) ?>
-                                <input type="hidden" name="detail_hidden[<?= $rows->id ?>][]" value="<?= $value ?>" />
+                                <input type="hidden" name="detail_hidden[<?= $rows->id ?>][]" value="<?= $value ?>" class="hiding_value" />
                             </label>
                         </div>
                     <?php 

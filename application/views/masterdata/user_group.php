@@ -16,12 +16,9 @@
                 $('#form_group').submit();
             });
             
-            $('#all').click(function(){
-                $(".check").each( function() {
-                    $(this).attr("checked",'checked');
-                });
-            }).click(function() {
+            $('#all').click(function() {
                 $('input[type=checkbox]').attr('checked','checked');
+                $('.hiding_value').val('1');
             });
             
             $('.form-control').change(function() {
@@ -32,6 +29,7 @@
             
             $('#uncek').click(function(){
                 $('input[type=checkbox]').removeAttr('checked');
+                $('.hiding_value').val('0');
             });
             
             $('input[type=checkbox]').live("change",function(){
@@ -194,7 +192,15 @@
         
         
     </script>
+    <?php 
+        $session =  $this->session->userdata('access'); 
+        if (!empty($session)) {
+            $access = explode('-', $session);
+        }
+    ?>
+    <?php if (isset($access[0]) and $access[0] === '1') { ?>
     <button id="add-user-group" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah User Group</button>
+    <?php } ?>
     <button id="reset-user-group" class="btn btn-default"><i class="fa fa-refresh"></i> Reload Data</button>
     <div id="group_list"></div>
 

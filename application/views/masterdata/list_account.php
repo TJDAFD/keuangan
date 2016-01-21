@@ -1,3 +1,9 @@
+<?php 
+    $session =  $this->session->userdata('access'); 
+    if (!empty($session)) {
+        $access = explode('-', $session);
+    }
+?>
 <table class="list-data" width="100%" cellspacing="0">
     <thead>
     <tr>
@@ -18,9 +24,15 @@
             <td><?= $rows->nama ?></td>
             <td><?= $rows->user_group ?></td>
             <td class="aksi"> 
+                <?php if (isset($access[4]) and $access[4] === '1') { ?>
                 <button class="btn btn-xs" onclick="resetpassword('<?= $rows->id ?>', '<?= $rows->username ?>');"><i class="fa fa-refresh"></i></button>
+                <?php } ?>
+                <?php if (isset($access[1]) and $access[1] === '1') { ?>
                 <button class="btn btn-xs" onclick="edit_user('<?= $str ?>');"><i class="fa fa-pencil"></i></button>
+                <?php } ?>
+                <?php if (isset($access[2]) and $access[2] === '1') { ?>
                 <button class="btn btn-xs" onclick="delete_user('<?= $rows->id ?>')"><i class="fa fa-trash-o"></i></button>
+                <?php } ?>
             </td>  
         </tr>
     <?php endforeach; ?>

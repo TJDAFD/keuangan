@@ -160,7 +160,15 @@
 
 
 </script>
+<?php 
+    $session =  $this->session->userdata('access'); 
+    if (!empty($session)) {
+        $access = explode('-', $session);
+    }
+?>
+<?php if (isset($access[0]) and $access[0] === '1') { ?>
 <button id="add-user-account" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah User</button>
+<?php } ?>
 <button id="reset-user-account" class="btn"><i class="fa fa-refresh"></i> Reload Data</button>
 <div id="user_list"></div>
 <div id="datamodal_user_account" class="modal fade">

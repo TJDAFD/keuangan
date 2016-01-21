@@ -364,8 +364,12 @@ class Masterdata extends CI_Controller {
     }
     
     /* USER ACCOUNT */
-    function account(){
+    function account($id_privileges){
         $data['title'] = 'Account';
+        $access = $this->m_user->get_extend_privileges($id_privileges);
+        if (isset($access->extend_privileges)) {
+            $this->session->set_userdata(array('access' => $access->extend_privileges));
+        }
         $this->load->view('masterdata/group', $data);
     }
 
