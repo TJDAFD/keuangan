@@ -425,7 +425,9 @@ class Transaksi extends CI_Controller {
     }
     
     function print_bukti_kas() {
-        $id = $_GET['id'];
+        $id = get_safe('id');
+        $data['header'] = $this->db->get('instansi')->row();
+        $data['row'] = $this->m_transaksi->print_bukti_kas($id)->row();
         $data['list_data'] = $this->m_transaksi->print_bukti_kas($id)->result();
         $this->load->view('transaksi/print-bukti-kas', $data);
     }

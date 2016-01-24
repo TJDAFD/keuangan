@@ -531,13 +531,18 @@ class M_transaksi extends CI_Model {
     }
     
     function print_bukti_kas($id) {
-        $sql = "select p.*, p.penerima, u.kode as ma_proja, s.nama as sub_rekening, u.uraian, 
+        $sql = "select p.*, p.penerima, IFNULL(u.kode,'-') as ma_proja, s.nama as sub_rekening, IFNULL(u.uraian,'-') as uraian, 
             p.pengeluaran as nominal, p.id_rekening as id_akun_rekening, p.id_rekening_pwk, p.jenis,
-            s.nama as rekening, ss.nama as rekening_pwk
+            s.nama as rekening, ss.nama as rekening_pwk, skr.nama as satker, us.nama as kasir
             from kasir p 
             left join sub_sub_sub_sub_rekening s on (p.id_rekening = s.id)
             left join sub_sub_sub_sub_rekening ss on (p.id_rekening_pwk = ss.id)
             left join uraian u on (p.id_uraian = u.id)
+            left join sub_kegiatan sk on (u.id_sub_kegiatan = sk.id)
+            left join kegiatan k on (sk.id_kegiatan = k.id)
+            left join program pr on (k.id_program = pr.id)
+            left join satker skr on (pr.id_satker = skr.id)
+            left join users us on (p.id_users = us.id)
             where p.id = '$id'";
         return $this->db->query($sql);
     }
