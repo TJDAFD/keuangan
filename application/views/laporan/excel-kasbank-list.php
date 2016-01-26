@@ -1,5 +1,5 @@
 <?php
-    header_excel('rekap_kas_bank_'.date2mysql($awal).'_sd_'.  date2mysql($akhir).'.xls');
+    header_excel('REKAP-KAS-BANK-'.date2mysql($awal).'_sd_'.  date2mysql($akhir).'.xls');
 ?>
 <table>
     <tr>

@@ -181,14 +181,14 @@ class M_laporan extends CI_Model {
             $r.=" and (id_rekening like ('%".$param['norekening']."%') or id_rekening_pwk like ('%".$param['norekening']."%'))";
         }
         if ($param['norekening'] === '') {
-            $sql = "select id, id_rekening, uraian, rekening from 
-                    (select s.id, k.id_rekening as id_rekening, u.uraian, s.nama as rekening 
+            $sql = "select id, id_rekening, uraian, rekening, kode from 
+                    (select s.id, k.id_rekening as id_rekening, u.uraian, s.nama as rekening, k.kode 
                     from kasir k 
                     left join uraian u on (k.id_uraian = u.id)
                     left join sub_sub_sub_sub_rekening s on (k.id_rekening = s.id)
                     where k.id_rekening is not NULL $q group by s.id
                     UNION ALL
-                    select s.id, k.id_rekening_pwk as id_rekening, u.uraian, s.nama as rekening 
+                    select s.id, k.id_rekening_pwk as id_rekening, u.uraian, s.nama as rekening, k.kode 
                     from kasir k 
                     left join uraian u on (k.id_uraian = u.id)
                     left join sub_sub_sub_sub_rekening s on (k.id_rekening_pwk = s.id)
@@ -208,7 +208,7 @@ class M_laporan extends CI_Model {
             left join uraian u on (k.id_uraian = u.id)
             left join sub_sub_sub_sub_rekening s on (k.id_rekening = s.id)
             where k.id is not NULL and (k.id_rekening = '".$value->id."' or k.id_rekening_pwk = '".$value->id."')
-                and k.tanggal between '".$param['awal']."' and '".$param['akhir']."'
+                and k.tanggal between '".$param['awal']."' and '".$param['akhir']."' order by k.kode desc
                 ";
             //echo $sql_child;
             $result[$key]->detail = $this->db->query($sql_child)->result();
