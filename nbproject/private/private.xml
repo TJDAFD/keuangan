@@ -67,6 +67,11 @@
             <file>file:/home/arvinnizar/html/keuangan/application/controllers/configuration.php</file>
             <file>file:/home/arvinnizar/html/keuangan/application/controllers/api/configuration.php</file>
             <file>file:/home/arvinnizar/html/keuangan/application/models/m_configuration.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/models/m_laporan.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/kasbank-list.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/excel-kasbank-list.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/rekap-rincian-realisasi-table.php</file>
+            <file>file:/home/arvinnizar/html/keuangan/application/views/laporan/realisasi-table.php</file>
         </group>
     </open-files>
 </project-private>

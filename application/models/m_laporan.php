@@ -181,19 +181,19 @@ class M_laporan extends CI_Model {
             $r.=" and (id_rekening like ('%".$param['norekening']."%') or id_rekening_pwk like ('%".$param['norekening']."%'))";
         }
         if ($param['norekening'] === '') {
-            $sql = "select id, id_rekening, uraian, rekening, kode from 
-                    (select s.id, k.id_rekening as id_rekening, u.uraian, s.nama as rekening, k.kode 
+            $sql = "select id, tanggal, id_rekening, uraian, rekening, kode from 
+                    (select s.id, k.tanggal, k.id_rekening as id_rekening, u.uraian, s.nama as rekening, k.kode 
                     from kasir k 
                     left join uraian u on (k.id_uraian = u.id)
                     left join sub_sub_sub_sub_rekening s on (k.id_rekening = s.id)
                     where k.id_rekening is not NULL $q group by s.id
                     UNION ALL
-                    select s.id, k.id_rekening_pwk as id_rekening, u.uraian, s.nama as rekening, k.kode 
+                    select s.id, k.tanggal, k.id_rekening_pwk as id_rekening, u.uraian, s.nama as rekening, k.kode 
                     from kasir k 
                     left join uraian u on (k.id_uraian = u.id)
                     left join sub_sub_sub_sub_rekening s on (k.id_rekening_pwk = s.id)
                     where k.id_rekening_pwk is not NULL $q group by s.id
-                    ) t group by id_rekening";
+                    ) t group by tanggal, id_rekening";
             //echo "<pre>".$sql."</pre>";
             $result = $this->db->query($sql)->result();
         } else {
