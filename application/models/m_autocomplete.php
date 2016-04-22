@@ -257,6 +257,7 @@ class M_autocomplete extends CI_Model {
         }
         if ($trans === 'bkk') {
             $sql = "select IFNULL(SUBSTR(kode,8,4),0) as kode, CONVERT(SUBSTR(kode,4,8),UNSIGNED INTEGER) AS num from kasir where jenis = 'BKK' and tanggal like '".$bulan."%' order by num desc limit 1";
+            echo $sql;
             $data= $this->db->query($sql)->row();
             if (isset($data->kode)) {
                 $auto = $data->kode;
