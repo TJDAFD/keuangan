@@ -208,7 +208,8 @@ class M_laporan extends CI_Model {
             left join uraian u on (k.id_uraian = u.id)
             left join sub_sub_sub_sub_rekening s on (k.id_rekening = s.id)
             where k.id is not NULL and (k.id_rekening = '".$value->id."' or k.id_rekening_pwk = '".$value->id."')
-                and k.tanggal between '".$param['awal']."' and '".$param['akhir']."' order by k.kode desc
+                and k.tanggal between '".$param['awal']."' and '".$param['akhir']."' 
+                order by k.tanggal, FIELD(SUBSTR(k.kode,1,3),'BKM','BKK','MTS')
                 ";
             //echo $sql_child;
             $result[$key]->detail = $this->db->query($sql_child)->result();
