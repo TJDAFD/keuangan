@@ -343,7 +343,11 @@
                 $('#sumberdana').val(data.sumberdana);
                 $('#kode_perkiraan').val(data.id_rekening+' '+data.rekening);
                 $('#hide_kode_perkiraan').val(data.id_rekening);
-                $('#kode').val(data.kode_uraian+' '+data.keterangan_ma);
+                if (data.kode_uraian === '') {
+                    $('#kode').val('');
+                } else {
+                    $('#kode').val(data.kode_uraian+' '+data.keterangan_ma);
+                }
                 $('#id_kode').val(data.id_uraian);
                 $('#pengguna').val(data.satker);
                 $('#label_uraian').html(data.keterangan);
