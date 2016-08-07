@@ -525,7 +525,8 @@ class Transaksi extends CI_Controller {
                     'kodema' => get_safe('id_kode'),
                     'kegiatan' => get_safe('kegiatan'),
                     'png_jwb' => get_safe('png_jwb'),
-                    'nomorbukti' => get_safe('nomorbukti')
+                    'nomorbukti' => get_safe('nomorbukti'),
+                    'makosong' => get_safe('makosong')
                 );
                 $data = $this->get_list_data_kasir($limit, $page, $search);
                 $this->load->view('transaksi/kasir-table', $data);
@@ -542,7 +543,8 @@ class Transaksi extends CI_Controller {
                     'kodema' => get_safe('id_kode'),
                     'kegiatan' => get_safe('kegiatan'),
                     'png_jwb' => get_safe('png_jwb'),
-                    'nomorbukti' => get_safe('nomorbukti')
+                    'nomorbukti' => get_safe('nomorbukti'),
+                    'makosong' => get_safe('makosong')
                 );
                 $query = $this->m_transaksi->get_data_kasir(NULL, NULL, $search);
                 $data['list_data'] = $query['data'];

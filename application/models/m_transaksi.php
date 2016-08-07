@@ -680,6 +680,14 @@ class M_transaksi extends CI_Model {
         if ($search['png_jwb'] !== '') {
             $q.=" and pg.penerima like ('%".$search['png_jwb']."%')";
         }
+        if ($search['makosong'] !== '') {
+            if ($search['makosong'] === 'Ya') {
+                $q.=" and pg.id_uraian is NULL";
+            }
+            if ($search['makosong'] === 'Tidak') {
+                $q.=" and pg.id_uraian is not NULL";
+            }
+        }
         $sql = "select pg.id, pg.kode, pg.sumberdana, pg.tanggal, pg.id_rekening, pg.id_renbut, pg.posted,
                 pg.id_uraian, pg.pengeluaran as nominal, pg.penerima as penanggung_jwb, pg.perwabku, substr(pg.kode,1,3) as kode_trans, 
                 u.uraian as keterangan, IFNULL(pg.id_renbut,'') as renbut, pg.keterangan as keterangan_kasir, pg.id_rekening_pwk, pg.jenis,

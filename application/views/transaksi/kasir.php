@@ -706,6 +706,16 @@
                     <input type="text" name="png_jwb" id="png_jwb" class="form-control" />
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Tampilkan MA Kosong:</label>
+                <div class="col-lg-8">
+                    <select name="makosong" class="form-control">
+                        <option value="">Semua ...</option>
+                        <option value="Ya">Ya</option>
+                        <option value="Tidak">Tidak</option>
+                    </select>
+                </div>
+            </div>
         </form>
         </div>
         <div class="modal-footer">
