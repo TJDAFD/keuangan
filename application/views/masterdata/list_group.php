@@ -3,6 +3,7 @@
     if (!empty($session)) {
         $access = explode('-', $session);
     }
+    echo $access;
 ?>
 <table class="list-data" width="100%" cellspacing="0">
     <thead>
