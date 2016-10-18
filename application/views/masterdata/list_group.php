@@ -3,7 +3,7 @@
     if (!empty($session)) {
         $access = explode('-', $session);
     }
-    echo $access;
+    echo $access[3].'#'.$access[1].'#'.$access[2];
 ?>
 <table class="list-data" width="100%" cellspacing="0">
     <thead>
