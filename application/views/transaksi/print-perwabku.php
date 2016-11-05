@@ -5,6 +5,9 @@
         setTimeout(function(){ window.close();},300);
     }
 </script>
+<style>
+    table tr td { line-height: 12px; }
+</style>
 <body onload="">
     <?php foreach ($list_data as $data); ?>
     <div class="page">
