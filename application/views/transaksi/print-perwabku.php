@@ -6,13 +6,13 @@
     }
 </script>
 <style>
-    table tr td { line-height: 12px; }
+    table tr td { line-height: 14px; }
 </style>
 <body onload="">
     <?php foreach ($list_data as $data); ?>
     <div class="page">
-    <h3 style="text-align: center; border-bottom: 1px solid #000;">PERTANGGUNG JAWABAN KEUANGAN<br/>UNIVERSITAS BHAYANGKARA SURABAYA</h3>
-    <table width="100%" style="line-height: 10px;">
+        <div style="border-bottom: 1px solid #000;">PERTANGGUNG JAWABAN KEUANGAN <span style="float: right">UNIVERSITAS BHAYANGKARA SURABAYA</span></div>
+    <table width="100%" cellspacing="0" cellpadding="0">
         <tr><td width="20%">No.</td><td width="1%">:</td><td width="79%"><?= $data->kode_pwk ?>
             (<?php 
             $value = array();
@@ -21,9 +21,10 @@
             } 
             echo implode(', ', $value);
             ?>)
+            <span style="float: right">Tanggal: <?= indo_tgl($data->tanggal) ?></span>
             </td></tr>
-        <!--<tr><td>Tanggal Masuk</td><td>:</td><td><?= indo_tgl(date2mysql(datetimefmysql($data->waktu))) ?></td></tr>-->
-        <tr><td>Tanggal Perwabku</td><td>:</td><td><?= indo_tgl($data->tanggal) ?></td></tr>
+        <!--<tr><td>Tanggal Masuk</td><td>:</td><td><?= indo_tgl(date2mysql(datetimefmysql($data->waktu))) ?></td></tr>
+        <tr><td>Tanggal Perwabku</td><td>:</td><td><?= indo_tgl($data->tanggal) ?></td></tr>-->
         <tr><td>Tahun Anggaran</td><td>:</td><td><?= $data->thn_anggaran ?></td></tr>
         <tr><td>Kode Unit Kerja</td><td>:</td><td><?= $data->kode_satker ?></td></tr>
         <tr><td>Unit Kerja</td><td>:</td><td><?= $data->satker ?></td></tr>
@@ -35,7 +36,7 @@
         <tr><td>Uraian Kegiatan</td><td>:</td><td><?= $data->uraian ?></td></tr>
         <tr><td>Keterangan</td><td>:</td><td></td></tr>
         <tr><td>Jumlah Dana Rp.</td><td>:</td><td><?= rupiah($data->dana) ?></td></tr>
-        <tr><td>Dana yang Digunakan Rp.</td><td>:</td><td><?= rupiah($data->dana_digunakan) ?>, Selisih Rp. <?= rupiah($data->dana-$data->dana_digunakan) ?></td></tr>
+        <tr><td>Dana Digunakan Rp.</td><td>:</td><td><?= rupiah($data->dana_digunakan) ?>, Selisih Rp. <?= rupiah($data->dana-$data->dana_digunakan) ?></td></tr>
         <tr><td>Penanggung Jawab</td><td>:</td><td>
             <?php 
             $values = array();
