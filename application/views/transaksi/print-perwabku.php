@@ -1,11 +1,11 @@
-<link rel="stylesheet" href="<?= base_url('assets/css/print-A4-half.css') ?>" media="all" />
+<link rel="stylesheet" href="<?= base_url('assets/css/printing-A4-half.css') ?>" media="all" />
 <script type="text/javascript">
     function cetak() {
         window.print();
         setTimeout(function(){ window.close();},300);
     }
 </script>
-<body onload="cetak();">
+<body onload="">
     <?php foreach ($list_data as $data); ?>
     <div class="page">
     <h3 style="text-align: center; border-bottom: 1px solid #000;">PERTANGGUNG JAWABAN KEUANGAN<br/>UNIVERSITAS BHAYANGKARA SURABAYA</h3>

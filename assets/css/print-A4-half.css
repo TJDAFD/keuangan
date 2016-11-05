@@ -4,7 +4,7 @@ body {
         background-color: #FAFAFA;
     }
     * {
-        font: 10pt sans-serif;
+        font: 10pt verdana;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
     }
@@ -63,21 +63,6 @@ h3 { font-size: 16px; margin-bottom: 0; }
 .tabel-laporan .number{text-align: center;}
 .tabel-laporan th rowspan, td rowspan{vertical-align: middle;}
 
-
-.table-list-data {
-    border-top: 1px solid #000;
-    border-left: 1px solid #000;
-}
-.table-list-data th {
-    border-bottom: 1px solid #000;
-    border-right: 1px solid #000;
-}
-.table-list-data td {
-    border-bottom: 1px solid #000;
-    border-right: 1px solid #000;
-    padding-left: 2px;
-    padding-right: 2px;
-}
 .subtotal{
     border-top:1px solid #000;
     border-bottom:1px solid #000;

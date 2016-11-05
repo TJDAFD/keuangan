@@ -4,7 +4,7 @@ body {
         background-color: #FAFAFA;
     }
     * {
-        font: 10pt sans-serif;
+        font: 10pt verdana;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
     }
@@ -65,6 +65,14 @@ h3 { font-size: 16px; margin-bottom: 0; }
 
 .subtotal{
     border-top:1px solid #000;
+    border-bottom:1px solid #000;
+}
+
+.topborder{
+    border-top:1px solid #000;
+}
+
+.bottomborder{
     border-bottom:1px solid #000;
 }
 
