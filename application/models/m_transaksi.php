@@ -531,7 +531,7 @@ class M_transaksi extends CI_Model {
     }
     
     function print_bukti_kas($id) {
-        $sql = "select p.*, p.penerima, IFNULL(u.kode,'-') as ma_proja, s.nama as sub_rekening, IFNULL(u.uraian,'-') as uraian, 
+        $sql = "select p.*, p.penerima, SUBSTR(p.kode,1,3) as kode_awal, IFNULL(u.kode,'-') as ma_proja, s.nama as sub_rekening, IFNULL(u.uraian,'-') as uraian, 
             p.pengeluaran as nominal, p.id_rekening as id_akun_rekening, p.id_rekening_pwk, p.jenis,
             s.nama as rekening, ss.nama as rekening_pwk, skr.nama as satker, us.nama as kasir
             from kasir p 

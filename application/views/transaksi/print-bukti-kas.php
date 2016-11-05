@@ -10,8 +10,20 @@
 </style>
 <?php
 foreach ($list_data as $detail);
+if ($detail->kode_awal === 'BKM') {
+    $kode_status = 'MASUK';
+    $status_uang = 'Telah Terima Dari';
+}
+if ($detail->kode_awal === 'BKK') {
+    $kode_status = 'KELUAR';
+    $status_uang = 'Harap Membayar Kepada';
+}
+if ($detail->kode_awal === 'MTS') {
+    $kode_status = 'MUTASI';
+    $status_uang = 'Telah Terima Dari';
+}
 ?>
-<body onload="cetak();">
+<body onload="">
     <div class="page">
     <table width="100%" cellspacing="0" style="margin-bottom: 2px;">
         <tr>
@@ -23,6 +35,23 @@ foreach ($list_data as $detail);
                 </table>
             </td>
             <td width="3%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="100%"  align="center"><?= $kode_status ?></td>
+        </tr>
+    </table>
+    <table width="100%" cellspacing="0" style="margin-bottom: 2px;">
+        <tr>
+            <td width="20%"><?= $status_uang ?></td><td width="1%">:</td><td><?= $detail->penerima ?></td>
+        </tr>
+        <tr>
+            <td width="20%">Uraian Kegiatan</td><td width="1%">:</td><td><?= $detail->keterangan ?></td>
+        </tr>
+        <tr>
+            <td width="20%">(D)</td><td width="1%">:</td><td><?= $detail->keterangan ?></td>
+        </tr>
+        <tr>
+            <td width="20%">(K)</td><td width="1%">:</td><td><?= $detail->keterangan ?></td>
         </tr>
     </table>
     <table width="100%" cellspacing="0">

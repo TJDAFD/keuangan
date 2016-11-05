@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= base_url('assets/css/printing-A4-half.css') ?>" media="all" />
+<link rel="stylesheet" href="<?= base_url('assets/css/print-A4-half.css') ?>" media="all" />
 <script type="text/javascript">
     function cetak() {
         window.print();
