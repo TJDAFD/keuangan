@@ -7,8 +7,9 @@
 </script>
 <style>
     table tr td { line-height: 14px; }
+    *, body { background: #fff; font-family: Arial, "Trebuchet MS"; font-size: 10px; }
 </style>
-<body onload="">
+<body onload="cetak();">
     <?php foreach ($list_data as $data); ?>
     <div class="page">
         <div style="border-bottom: 1px solid #000;">PERTANGGUNG JAWABAN KEUANGAN <span style="float: right">UNIVERSITAS BHAYANGKARA SURABAYA</span></div>

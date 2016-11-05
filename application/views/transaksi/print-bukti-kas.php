@@ -5,7 +5,7 @@
         setTimeout(function(){ window.close();},300);
     }
 </script>
-<style type="text/css" media="print">
+<style type="text/css" media="all">
     *, body { background: #fff; font-family: Arial, "Trebuchet MS"; font-size: 10px; }
 </style>
 <?php
@@ -13,17 +13,23 @@ foreach ($list_data as $detail);
 if ($detail->kode_awal === 'BKM') {
     $kode_status = 'MASUK';
     $status_uang = 'Telah Terima Dari';
+    $label_coa_d = 'Diterima pada '.(($detail->jenis === 'BKK')?'(K)':'(D)');
+    $label_coa_k = 'Sumber penerimaan '.(($detail->jenis === 'BKK')?'(D)':'(K)');
 }
 if ($detail->kode_awal === 'BKK') {
     $kode_status = 'KELUAR';
     $status_uang = 'Harap Membayar Kepada';
+    $label_coa_d = 'Untuk membayar '.(($detail->jenis === 'BKK')?'(K)':'(D)');
+    $label_coa_k = 'Sumber pembayaran '.(($detail->jenis === 'BKK')?'(D)':'(K)');
 }
 if ($detail->kode_awal === 'MTS') {
     $kode_status = 'MUTASI';
     $status_uang = 'Telah Terima Dari';
+    $label_coa_d = 'Diterima pada '.(($detail->jenis === 'BKK')?'(K)':'(D)');
+    $label_coa_k = 'Dipindahkan dari '.(($detail->jenis === 'BKK')?'(D)':'(K)');
 }
 ?>
-<body onload="">
+<body onload="cetak();">
     <div class="page">
     <table width="100%" cellspacing="0" style="margin-bottom: 2px;">
         <tr>
@@ -42,34 +48,35 @@ if ($detail->kode_awal === 'MTS') {
     </table>
     <table width="100%" cellspacing="0" style="margin-bottom: 2px;">
         <tr>
-            <td width="20%"><?= $status_uang ?></td><td width="1%">:</td><td><?= $detail->penerima ?></td>
+            <td width="20%"><?= $status_uang ?></td><td width="1%">:</td><td colspan="2"><?= $detail->penerima ?></td>
         </tr>
         <tr>
-            <td width="20%">Uraian Kegiatan</td><td width="1%">:</td><td><?= $detail->keterangan ?></td>
+            <td width="20%">Uraian Kegiatan</td><td width="1%">:</td><td colspan="2"><?= $detail->keterangan ?></td>
         </tr>
         <tr>
-            <td width="20%">(D)</td><td width="1%">:</td><td><?= $detail->keterangan ?></td>
+            <td width="20%"><?= $label_coa_d ?></td><td width="1%">:</td><td><?= $detail->rekening ?></td><td>Satker: <?= $detail->satker ?></td>
         </tr>
         <tr>
-            <td width="20%">(K)</td><td width="1%">:</td><td><?= $detail->keterangan ?></td>
+            <td width="20%"><?= $label_coa_k ?></td><td width="1%">:</td><td colspan="2"><?= $detail->rekening_pwk ?></td>
         </tr>
     </table>
     <table width="100%" cellspacing="0">
         <tr>
+            <th width="2%">&nbsp;</th>
             <th width="15%">&nbsp;</th>
-            <th width="15%">&nbsp;</th>
-            <th width="40%">&nbsp;</th>
+            <th width="38%">&nbsp;</th>
             <th width="20%">&nbsp;</th>
-            <th width="10%">&nbsp;</th>
+            <th width="15%">&nbsp;</th>
         </tr>
         <?php
         $total = 0;
         foreach ($list_data as $key => $data) { 
             ?>
         <tr valign="top">
-            <td align="center"><?= ($data->jenis === 'BKK')?$data->id_rekening_pwk:$data->id_akun_rekening ?></td>
+            <td align="center"></td>
             <td><?= $data->ma_proja ?></td>
             <td><?= $data->uraian ?></td>
+            <td align="center"></td>
             <td align="right"><?= rupiah($data->nominal) ?></td>
         </tr>
         <tr valign="top">
@@ -77,18 +84,21 @@ if ($detail->kode_awal === 'MTS') {
             <td></td>
             <td><?= $data->keterangan ?></td>
             <td align="right"></td>
+            <td align="center"></td>
         </tr>
         <tr valign="top">
             <td align="center"></td>
-            <td><?= $data->id_rekening ?> <?= ($data->jenis === 'BKK')?'(K)':'(D)' ?></td>
-            <td><?= $data->rekening ?></td>
+            <td></td>
+            <td>&nbsp;</td>
             <td align="right"></td>
+            <td align="center"></td>
         </tr>
         <tr valign="top">
             <td align="center"></td>
-            <td><?= $data->id_rekening_pwk ?> <?= ($data->jenis === 'BKK')?'(D)':'(K)' ?></td>
-            <td><?= $data->rekening_pwk ?></td>
+            <td></td>
+            <td>&nbsp;</td>
             <td align="right"></td>
+            <td align="center"></td>
         </tr>
         <?php 
         $total = $total + $data->nominal;
@@ -99,11 +109,12 @@ if ($detail->kode_awal === 'MTS') {
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
         </tr>
         <?php }
         ?>
         <tr>
-            <td colspan="3" align="right">&nbsp;</td>
+            <td colspan="4" align="right">&nbsp;</td>
             <td align="right"><?= rupiah($total) ?></td>
         </tr>
         <tr>
