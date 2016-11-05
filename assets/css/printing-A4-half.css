@@ -4,14 +4,14 @@ body {
         background-color: #FAFAFA;
     }
     * {
-        font: 8pt verdana;
+        font: 10pt sans-serif;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
     }
     .page {
         width: 21cm;
-        min-height: 19.8cm;
-        padding-top: 0.5cm;
+        min-height: 15.0cm;
+        padding-top: 0;
         padding-left: 1cm;
         padding-right: 1cm;
         margin: 1cm auto;
