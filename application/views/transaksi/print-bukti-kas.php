@@ -28,7 +28,7 @@ if ($detail->kode_awal === 'MTS') {
 ?>
 <body onload="cetak();">
     <div class="page">
-    <table width="100%" cellspacing="0" style="margin-bottom: 5px; margin-top: -10px;">
+    <table width="100%" cellspacing="0" style="margin-bottom: 5px; margin-top: -15px;">
         <tr>
             <td width="15%"></td>
             <td align="center" width="57%">&nbsp;</td><td width="25%" valign="top" align="right">
@@ -54,7 +54,7 @@ if ($detail->kode_awal === 'MTS') {
             <td width="23%"><?= $status_uang ?></td><td width="1%"></td><td colspan="2"><?= $detail->penerima ?></td>
         </tr>
         <tr>
-            <td width="23%"></td><td width="1%"></td><td colspan="2"><?= $detail->keterangan ?></td>
+            <td width="23%">Uraian Kegiatan</td><td width="1%"></td><td colspan="2"><?= $detail->keterangan ?></td>
         </tr>
         <tr>
             <td width="23%"><?= $label_coa_d ?></td><td width="1%"></td><td><?= $detail->rekening ?></td><td>Satker: <?= $detail->satker ?></td>
@@ -116,12 +116,12 @@ if ($detail->kode_awal === 'MTS') {
         </tr>
         <?php }
         ?>
+    </table>
+    <table width="100%" cellspacing="0" style="margin-top: 20px;">
         <tr>
             <td colspan="4" align="right">&nbsp;</td>
             <td align="right"><?= rupiah($total) ?></td>
         </tr>
-    </table>
-    <table width="100%" cellspacing="0" style="margin-top: 20px;">
         <tr>
             <td valign="top" width="20%">&nbsp;</td><td><?= ucwords(toTerbilang($total)) ?> rupiah</td>
         </tr>
@@ -146,9 +146,10 @@ if ($detail->kode_awal === 'MTS') {
         <tr>
             <td align="right">&nbsp;</td>
             <td align="center">&nbsp;</td>
-            <td align="center">&nbsp;</td>
+            
             <td align="center"> <?= $this->session->userdata('nama') ?></td>
             <td align="center"> <?= $detail->penerima ?></td>
+            <td align="center">&nbsp;</td>
         </tr>
     </table>
     </div>
