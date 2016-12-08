@@ -4,17 +4,18 @@ body {
         background-color: #FAFAFA;
     }
     * {
-        font: 10pt verdana;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
+        font-size: 13px;
+        font-family: Arial, "Trebuchet MS", Tahoma;
     }
-    .page {
+    body .page {
         width: 21cm;
-        min-height: 19.8cm;
-        padding-top: 0.5cm;
-        padding-left: 1cm;
-        padding-right: 1cm;
-        margin: 1cm auto;
+        min-height: 14.5cm;
+        padding-top: 0.6cm;
+        padding-left: 1.5cm;
+        padding-right: 1.5cm;
+        margin: auto;
         border: 1px #D3D3D3 solid;
         border-radius: 5px;
         background: white;

@@ -5,9 +5,6 @@
         setTimeout(function(){ window.close();},300);
     }
 </script>
-<style type="text/css" media="all">
-    *, body { background: #fff; font-family: Arial, "Trebuchet MS"; font-size: 10px; }
-</style>
 <?php
 foreach ($list_data as $detail);
 if ($detail->kode_awal === 'BKM') {
@@ -31,7 +28,7 @@ if ($detail->kode_awal === 'MTS') {
 ?>
 <body onload="cetak();">
     <div class="page">
-    <table width="100%" cellspacing="0" style="margin-bottom: 2px;">
+    <table width="100%" cellspacing="0" style="margin-bottom: 5px; margin-top: -10px;">
         <tr>
             <td width="15%"></td>
             <td align="center" width="57%">&nbsp;</td><td width="25%" valign="top" align="right">
@@ -43,21 +40,27 @@ if ($detail->kode_awal === 'MTS') {
             <td width="3%">&nbsp;</td>
         </tr>
         <tr>
-            <td width="100%"  align="center"><?= $kode_status ?></td>
+            <td width="100%"  align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="100%"  align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="100%"  align="center" style="font-size: 17px; font-weight: bold;"><?= $kode_status ?></td>
         </tr>
     </table>
-    <table width="100%" cellspacing="0" style="margin-bottom: 2px;">
+    <table width="100%" cellspacing="0" style="margin-bottom: 29px; margin-top: 10px;">
         <tr>
-            <td width="20%"><?= $status_uang ?></td><td width="1%">:</td><td colspan="2"><?= $detail->penerima ?></td>
+            <td width="23%"><?= $status_uang ?></td><td width="1%"></td><td colspan="2"><?= $detail->penerima ?></td>
         </tr>
         <tr>
-            <td width="20%">Uraian Kegiatan</td><td width="1%">:</td><td colspan="2"><?= $detail->keterangan ?></td>
+            <td width="23%"></td><td width="1%"></td><td colspan="2"><?= $detail->keterangan ?></td>
         </tr>
         <tr>
-            <td width="20%"><?= $label_coa_d ?></td><td width="1%">:</td><td><?= $detail->rekening ?></td><td>Satker: <?= $detail->satker ?></td>
+            <td width="23%"><?= $label_coa_d ?></td><td width="1%"></td><td><?= $detail->rekening ?></td><td>Satker: <?= $detail->satker ?></td>
         </tr>
         <tr>
-            <td width="20%"><?= $label_coa_k ?></td><td width="1%">:</td><td colspan="2"><?= $detail->rekening_pwk ?></td>
+            <td width="23%"><?= $label_coa_k ?></td><td width="1%"></td><td colspan="2"><?= $detail->rekening_pwk ?></td>
         </tr>
     </table>
     <table width="100%" cellspacing="0">
@@ -117,20 +120,23 @@ if ($detail->kode_awal === 'MTS') {
             <td colspan="4" align="right">&nbsp;</td>
             <td align="right"><?= rupiah($total) ?></td>
         </tr>
+    </table>
+    <table width="100%" cellspacing="0" style="margin-top: 20px;">
         <tr>
-            <td rowspan="2" valign="top">&nbsp;</td><td colspan="3"><?= ucwords(toTerbilang($total)) ?> rupiah</td>
+            <td valign="top" width="20%">&nbsp;</td><td><?= ucwords(toTerbilang($total)) ?> rupiah</td>
         </tr>
         <tr>
-            <td rowspan="2" valign="top">&nbsp;</td><td colspan="3"></td>
+            <td valign="top">&nbsp;</td><td></td>
         </tr>
     </table>
     <table width="100%" cellspacing="0">
         <tr>
             <th width="30%">&nbsp;</th>
-            <th width="15%">&nbsp;</th>
-            <th width="15%">&nbsp;</th>
             <th width="20%">&nbsp;</th>
             <th width="20%">&nbsp;</th>
+            <th width="15%">&nbsp;</th>
+            <th width="15%">&nbsp;</th>
+            
         </tr>
         <?php for ($i = 1; $i <= 2; $i++) { ?>
         <tr>

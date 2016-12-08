@@ -7,8 +7,8 @@
 </script>
 <body onload="cetak();">
     <div class="page">
-    <h3 style="text-align: center; border-bottom: 1px solid #000;">RENCANA ANGGARAN<br/>UNIVERSITAS BHAYANGKARA SURABAYA</h3>
-    <table width="100%" style="line-height: 10px;">
+    <h3 style="text-align: center; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #000; font-size: 16px; font-weight: bold">RENCANA KEBUTUHAN<br/>UNIVERSITAS BHAYANGKARA SURABAYA</h3>
+    <table width="100%" style="line-height: 14px;">
         <tr><td width="20%">No.</td><td width="1%">:</td><td width="79%"><?= $data->kode ?></td></tr>
         <tr><td>Tanggal Renbut</td><td>:</td><td><?= indo_tgl($data->tanggal_renbut) ?></td></tr>
         <tr><td>Tanggal Kegiatan</td><td>:</td><td><?= indo_tgl($data->tanggal_kegiatan) ?></td></tr>

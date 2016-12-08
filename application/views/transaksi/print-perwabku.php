@@ -5,14 +5,10 @@
         setTimeout(function(){ window.close();},300);
     }
 </script>
-<style>
-    table tr td { line-height: 14px; }
-    *, body { background: #fff; font-family: Arial, "Trebuchet MS"; font-size: 10px; }
-</style>
 <body onload="cetak();">
     <?php foreach ($list_data as $data); ?>
     <div class="page">
-        <div style="border-bottom: 1px solid #000;">PERTANGGUNG JAWABAN KEUANGAN <span style="float: right">UNIVERSITAS BHAYANGKARA SURABAYA</span></div>
+        <div style="font-size: 16px;font-weight: bold; border-bottom: 1px solid #000; text-align: center; padding-bottom: 10px; margin-bottom: 10px;">PERTANGGUNG JAWABAN KEUANGAN <br/>UNIVERSITAS BHAYANGKARA SURABAYA</div>
     <table width="100%" cellspacing="0" cellpadding="0">
         <tr><td width="20%">No.</td><td width="1%">:</td><td width="79%"><?= $data->kode_pwk ?>
             (<?php 
