@@ -28,7 +28,7 @@ if ($detail->kode_awal === 'MTS') {
 ?>
 <body onload="cetak();">
     <div class="page">
-    <table width="100%" cellspacing="0" style="margin-bottom: 5px; margin-top: -15px;">
+    <table width="100%" cellspacing="0" style="margin-bottom: 2px; margin-top: -10px;">
         <tr>
             <td width="15%"></td>
             <td align="center" width="57%">&nbsp;</td><td width="25%" valign="top" align="right">
