@@ -8,6 +8,7 @@
 <body onload="cetak();">
     <?php foreach ($list_data as $data); ?>
     <div class="page">
+        <br/>
         <div style="font-size: 16px;font-weight: bold; border-bottom: 1px solid #000; text-align: center; padding-bottom: 10px; margin-bottom: 10px;">PERTANGGUNG JAWABAN KEUANGAN <br/>UNIVERSITAS BHAYANGKARA SURABAYA</div>
     <table width="100%" cellspacing="0" cellpadding="0">
         <tr><td width="20%">No.</td><td width="1%">:</td><td width="79%"><?= $data->kode_pwk ?>
